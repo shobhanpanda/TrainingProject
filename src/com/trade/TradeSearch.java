@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.connection.MySQLConnection;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 @WebServlet("/securitysearch")
 public class TradeSearch extends HttpServlet {
@@ -14,17 +16,22 @@ public class TradeSearch extends HttpServlet {
 	public void service(HttpServletRequest request,HttpServletResponse response) {
 		String search=request.getParameter("substr");
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT * FROM reference_table where ProductName like '?%'";
+		String select="SELECT * FROM refdb where ISIN like '"+ search+"%'";
+		System.out.println(select);
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(select);
-			ps.setString(1, search);
 			ResultSet rs=ps.executeQuery();
+			String str="<ul>";
 			while(rs.next())  {
 				//Enter the table entries here
+				str+="<li>"+rs.getString("ISIN")+"</li>";
 			}
-			conn.close(); 
-		} catch (SQLException e) {
+			str+="</ul>";
+			conn.close();
+			PrintWriter out=response.getWriter();
+			out.print(str);
+		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
