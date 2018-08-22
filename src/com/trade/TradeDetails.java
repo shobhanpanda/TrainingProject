@@ -20,24 +20,28 @@ public class TradeDetails extends HttpServlet {
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(insert);
+			
 			// Set String
 			ps.setString(1, request.getParameter("isin"));
 			ps.setString(2, request.getParameter("tradedate"));
 			ps.setString(3, request.getParameter("time"));
 			ps.setString(4, request.getParameter("buy"));
-			ps.setString(5, request.getParameter("price"));
+			ps.setInt(5, Integer.parseInt(request.getParameter("price")));
 			ps.setString(6, request.getParameter("counterparty"));
 			ps.setString(7, request.getParameter("settlementdate"));
+//			System.out.println(ps);
 			int flag=ps.executeUpdate();
 			conn.close();
 			if(flag>0) {
-			response.sendRedirect("index.jsp" );
+			response.sendRedirect("trade.jsp" );
 			}else {
-				response.sendRedirect("register.jsp");
+				//Send to error page
+				
 			}
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }
