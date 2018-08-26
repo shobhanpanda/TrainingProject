@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
 import com.connection.MySQLConnection;
-import com.mysql.jdbc.PreparedStatement;
 
 /**
  * Servlet Filter implementation class TradeDetailsFilter
