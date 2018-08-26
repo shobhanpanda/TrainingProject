@@ -1,32 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en" class="fullscreen-bg">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<title>Register | CITI</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="assets/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="assets/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 </head>
+
 <body>
-	<form action="register" method="post" id="registerform">
-	User Name:<input type="text" name="name" required minlength="3" ></br>
-	Password:<input type="password" name="password" required minlength="6" id="password"></br>
-	Re-type Password: <input type="password" name="repassword" required minlength="6" onkeyup="compare(this.value)" id="retype"></br>
-	<button onclick="submit()">Submit</button>
-	</form>
-	
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="" style="margin-top: 50px;">
+				<div class="auth-box lockscreen clearfix">
+					<div class="content">
+						<h1 class="sr-only">Klorofil - Free Bootstrap dashboard</h1>
+						<div class="logo text-center"><!--img src="assets/img/logo-dark.png" alt="Klorofil Logo"--><h2>Register</h2></div>
+						<!--div class="user text-center">
+							<img src="assets/img/user-medium.png" class="img-circle" alt="Avatar">
+							<h2 class="name">Samuel Gold</h2>
+						</div-->
+						<form action="register" method="POST" autocomplete="off" id="registerform">
+							<!-- <div class="input-group" > -->
+								<!-- <input type="text" class="form-control" placeholder="Enter your name" style="margin-bottom: 5%;"> -->
+								<input class="form-control" placeholder="Enter your username" type="text" style="margin-bottom: 5%;" name="name" required="true" minlength="3">
+								<input type="password" class="form-control" placeholder="Enter your password" style="margin-bottom: 5%;" name="password" required="true" minlength="6" id="password">
+								<input type="password" class="form-control" placeholder="Re-type your password" style="margin-bottom: 5%;"  name="repassword" required="true"  minlength="6" onkeyup="compared(this.value)" id="retype">
+								<button type="submit" class="btn btn-primary" style="margin-left: 43%; font-size: 102%;" ><i class="">SUBMIT</i></button>
+								<!--span class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i></button></span-->
+							<!-- </div> -->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
 </body>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 flag=false;
-function compare(retype){
+function compared(retype){
 	var password=document.getElementById("password").value;
 	flag=false
 	if(password===retype){
 		flag=true;
 	}
+	console.log(flag);
 }
-function submit(){
+
+$("#registerform").submit(function(event){
+    event.preventDefault(); 
+	console.log("Working");
 	if(flag===true){
-		document.getElementById("registerform").submit();
+		this.submit();
 	}
 	else{
 		alert("The password doesn't match");
@@ -34,6 +77,7 @@ function submit(){
 		document.getElementById("retype").value='';
 		
 	}
-}
+});
+
 </script>
 </html>
