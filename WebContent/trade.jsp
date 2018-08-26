@@ -25,7 +25,7 @@
 <body>
 <h2>Trade Details Form</h2>
 
-	<form action="trade" method="post" >
+	<form action="trade" method="post"  autocomplete="off" >
 	Trade Date:<input type="date" name="tradedate" id="tradedate" onchange="TDate(this)" required><br>
 	Trade Time:<input type="time" name="time" required ><br>
 	Security ISIN:  <input type="text" name="isin" id="isin" onkeyup="search(this)" required><br>
@@ -34,10 +34,13 @@
 	<input type="radio" name="buy" value="buy" checked> Buy
 	<input type="radio" name="buy" value="sell" > Sell<br>
 	</div>
-	Traded-Price: <input type="text" name="price" required ><br>
+	Traded-Price: <input type="text" name="price" id="price" onchange="getBond()" required ><br>
+	Yield:<input type="text" name="yield" id="yield"  required ><br>
 	Counter-Party: <input type="text" name="counterparty" required><br>
 	Settlement Date:<input type="date" name="settlementdate" onchange="TDate(this)" required><br>
-
+	<input type="hidden" name="face_value" id="face_value">
+	<input type="hidden" name="coupon" id="coupon">
+	<input type="hidden" name="years" id="years">
 	<button>Submit</button>
 	</form>
 
@@ -62,7 +65,7 @@
 	                data: {substr:myString},
 					success:(function(data)
 				            {
-		            	console.log(data);
+		            	//console.log(data);
 		            	$("#response").html(data);
 		            	}
 
@@ -77,6 +80,84 @@
 		$('#isin').val($(this).text());
 		$("#response").html("");
 	});
+	</script>
+	
+	<script>
+	//Price Yield Calculation
+	function getBond()
+	{	
+		var myIsin=document.getElementById("isin").value;
+		console.log(myIsin);
+		$.ajax(
+	            {
+	                url: 'yieldcalculator',
+	                type: "POST",
+	                data: {isin:myIsin},
+					success:(function(data)
+				            {
+		            	bond=JSON.parse(data);
+		            	//console.log(bond);
+		            	doCalc(bond);
+		            	}
+
+		            )
+	            })
+	            .fail(function(jqXHR, ajaxOptions, thrownError)
+	            {
+	                  alert('server not responding...');
+	            });
+	}
+	function doCalc(bond){
+		
+		var p = parseInt(document.getElementById("price").value,10);//Price
+		console.log(typeof(p));
+		var r = (bond.coupon)/100;//Coupon
+		var b = bond.facevalue;//Face Value
+		var y = bond.year;////Year
+
+		//document.mainform.currentYield.value = numval(r*b*100/p,3);
+		
+		var ytm = bondYTM(p,r,b,y);
+		console.log(ytm)
+		if (ytm >= 0)
+			document.getElementById("yield").value =ytm*100;
+		else
+			document.getElementById("yield").value = "error";
+	}
+	function fYTM(z,p,c,b,y)
+	{
+		return (c + b)*Math.pow(z,y+1) - b*Math.pow(z,y) - (c+p)*z + p;
+	}
+
+	function dfYTM(z,p,c,b,y)
+	{
+		return (y+1)*(c + b)*Math.pow(z,y) - y*b*Math.pow(z,y - 1) - (c+p);
+	}
+
+	function bondYTM(p,r,b,y)
+	{
+		var z = r;
+		var c = r*b;
+		var i;
+		var E = .00001;
+
+		if (r == 0)
+		{
+			return returnRate(p,b,y);
+		}
+			
+		for (i = 0; i < 100; i++)
+		{
+			if (Math.abs(fYTM(z,p,c,b,y)) < E) break;
+			
+			while (Math.abs(dfYTM(z,p,c,b,y)) < E) z+= .1;
+			z = z - (fYTM(z,p,c,b,y)/dfYTM(z,p,c,b,y));
+		}
+		if (Math.abs(fYTM(z,p,c,b,y)) >= E) return -1;  // error
+
+		return (1/z) - 1;
+	}	
+	
 	</script>
 
 </body>
