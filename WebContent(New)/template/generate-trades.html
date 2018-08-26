@@ -19,6 +19,19 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<style>
+
+		.leftFormPanel p{
+			margin: 8%;
+		}
+
+		.textElement{
+			margin: 6%;
+		}
+
+
+
+	</style>
 </head>
 
 <body>
@@ -124,7 +137,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<!-- BUTTONS -->
-							<div class="panel">
+							<!--div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Buttons</h3>
 								</div>
@@ -168,55 +181,124 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div-->
 							<!-- END BUTTONS -->
 							<!-- INPUTS -->
 							<div class="panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">Inputs</h3>
+									<h3>Enter trade details</h3>
 								</div>
 								<div class="panel-body">
-									<input type="text" class="form-control" placeholder="text field">
-									<br>
-									<input type="password" class="form-control" value="asecret">
-									<br>
-									<textarea class="form-control" placeholder="textarea" rows="4"></textarea>
-									<br>
-									<select class="form-control">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-									<br>
-									<label class="fancy-checkbox">
-										<input type="checkbox">
-										<span>Fancy Checkbox 1</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox">
-										<span>Fancy Checkbox 2</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox">
-										<span>Fancy Checkbox 3</span>
-									</label>
-									<br>
-									<label class="fancy-radio">
-										<input name="gender" value="male" type="radio">
-										<span><i></i>Male</span>
-									</label>
-									<label class="fancy-radio">
-										<input name="gender" value="female" type="radio">
-										<span><i></i>Female</span>
-									</label>
+									<form>
+										<div class="row">
+											<div class="leftFormPanel col-md-4">
+												<p>Trade Date:</p>
+												<br>
+												<p>Trade time:</p>
+												<br>
+												<p>Security ISIN:</p>
+												<br>
+												<p>Trade type: </p>
+												<br>
+												<p>Traded price: </p>
+												<br>
+												<p>Yield: </p>
+												<br>
+												<p>Counter-party: </p>
+												<br>
+												<p>Settlement Date: </p>
+												<br>
+											</div>
+											<div class="rightFormPanel col-md-2" style="width: 40%;">
+												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" required></p>
+												<p><input type="time" name="tradetime" class="textElement" required></p>
+												<p><input type="text" name="isin" id="isin" class="textElement" required></p>
+												<div id="response"></div>
+												<p>
+													<div class="row textElement">
+														<div class="col-md-6">
+															<input name="tradetype" value="Buy" type="radio" checked>
+															<span><i></i>Buy</span>
+														</div>
+														<div class="col-md-6" style="">
+															<input name="tradetype" value="Sell" type="radio">
+															<span><i></i>Sell</span>
+														</div>
+													</div>
+												</p>
+												<p><input type="text" name="price" id="price" class="textElement" required></p>
+												<p><input type="text" name="yield" id="yield" class="textElement" required></p>
+												<p><input type="text" name="counterparty" class="textElement" required></p>
+												<p><input type="Date" name="settlementdate" class="textElement" required></p>
+											</div>
+										</div>
+										<input type="hidden" name="face_value" id="face_value" class="form-control" placeholder="Face Value">
+										<br>
+										<input type="hidden" name="coupon" id="coupon" class="form-control">
+										<br>
+										<input type="hidden" name="years" id="years" class="form-control">
+										<br>
+										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
+										<!--br><br>
+										Trade Date: <input type="Date">
+										<br><br>
+										Trade Time: <input type="time"required>
+										<br><br>
+										Security ISIN: <input type="text" placeholder="->
+										<br><br>
+										<div class="row">
+											<div class="col-md-3">Trade type:
+											</div>
+											<label class="fancy-radio col-md-3">
+												<input name="gender" value="Buy" type="radio">
+												<span><i></i>Buy</span>
+											</label>
+											<label class="fancy-radio col-md-3">
+												<input name="gender" value="Sell" type="radio">
+												<span><i></i>Sell</span>
+											</label>
+										</div>
+										<br>
+										<input type="password" class="form-control" value="asecret">
+										<br>
+										<textarea class="form-control" placeholder="textarea" rows="4"></textarea>
+										<br>
+										<select class="form-control">
+											<option value="cheese">Cheese</option>
+											<option value="tomatoes">Tomatoes</option>
+											<option value="mozarella">Mozzarella</option>
+											<option value="mushrooms">Mushrooms</option>
+											<option value="pepperoni">Pepperoni</option>
+											<option value="onions">Onions</option>
+										</select>
+										<br>
+										<label class="fancy-checkbox">
+											<input type="checkbox">
+											<span>Fancy Checkbox 1</span>
+										</label>
+										<label class="fancy-checkbox">
+											<input type="checkbox">
+											<span>Fancy Checkbox 2</span>
+										</label>
+										<label class="fancy-checkbox">
+											<input type="checkbox">
+											<span>Fancy Checkbox 3</span>
+										</label>
+										<br>
+										<label class="fancy-radio">
+											<input name="gender" value="male" type="radio">
+											<span><i></i>Male</span>
+										</label>
+										<label class="fancy-radio">
+											<input name="gender" value="female" type="radio">
+											<span><i></i>Female</span>
+										</label-->
+									</form>
 								</div>
 							</div>
 							<!-- END INPUTS -->
 							<!-- INPUT SIZING -->
-							<div class="panel">
+							<!--div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Input Sizing</h3>
 								</div>
@@ -254,7 +336,7 @@
 										<option value="onions">Onions</option>
 									</select>
 								</div>
-							</div>
+							</div-->
 							<!-- END INPUT SIZING -->
 						</div>
 						<div class="col-md-6">
