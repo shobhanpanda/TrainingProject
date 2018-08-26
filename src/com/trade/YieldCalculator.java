@@ -29,7 +29,7 @@ public class YieldCalculator extends HttpServlet {
 		Connection conn= MySQLConnection.getConnection();
 		String select="SELECT refdb.CouRate,(DATEDIFF(refdb.MatDate,refdb.IsDate)/365),fvconv.FV FROM refdb "+
 				"INNER JOIN fvconv ON refdb.CoCode=fvconv.Country WHERE refdb.ISIN='"+ isin+"'" ;
-		System.out.println(select);
+		//System.out.println(select);
 		PreparedStatement ps;
 		JSONObject json=new JSONObject();
 		try {

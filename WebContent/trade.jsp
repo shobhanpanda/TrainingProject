@@ -35,12 +35,9 @@
 	<input type="radio" name="buy" value="sell" > Sell<br>
 	</div>
 	Traded-Price: <input type="text" name="price" id="price" onchange="getBond()" required ><br>
-	Yield:<input type="text" name="yield" id="yield"  required ><br>
+	Yield:<input type="text" name="yield" id="yield" onchange="doCalcPrice(this.value)"  required ><br>
 	Counter-Party: <input type="text" name="counterparty" required><br>
 	Settlement Date:<input type="date" name="settlementdate" onchange="TDate(this)" required><br>
-	<input type="hidden" name="face_value" id="face_value">
-	<input type="hidden" name="coupon" id="coupon">
-	<input type="hidden" name="years" id="years">
 	<button>Submit</button>
 	</form>
 
@@ -97,7 +94,7 @@
 				            {
 		            	bond=JSON.parse(data);
 		            	//console.log(bond);
-		            	doCalc(bond);
+		            	doCalcYield(bond);
 		            	}
 
 		            )
@@ -107,7 +104,7 @@
 	                  alert('server not responding...');
 	            });
 	}
-	function doCalc(bond){
+	function doCalcYield(bond){
 		
 		var p = parseInt(document.getElementById("price").value,10);//Price
 		console.log(typeof(p));
@@ -157,6 +154,23 @@
 
 		return (1/z) - 1;
 	}	
+	
+	</script>
+	
+	<script type="text/javascript">
+	function doCalcPrice(str){
+		//console.log(bond);
+		
+		var byield=parseFloat(str,10);
+		console.log(byield);
+		var r=1/byield;
+		var a=((bond.coupon*bond.facevalue)*r);
+		var b=((Math.pow(r,Math.floor(bond.year))-1)/(r-1));
+		var c=(bond.facevalue*(Math.pow(r,bond.year)));
+		var price=(a*b)+c;
+		document.getElementById("price").value=price;
+	
+	}
 	
 	</script>
 
