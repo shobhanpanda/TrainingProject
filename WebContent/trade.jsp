@@ -35,7 +35,7 @@
 	<input type="radio" name="buy" value="sell" > Sell<br>
 	</div>
 	Traded-Price: <input type="text" name="price" id="price" onchange="getBond()" required ><br>
-	Yield:<input type="text" name="yield" id="yield" onchange="computeBondPrice(this.value)"  required ><br>
+	Yield:<input type="text" name="yield" id="yield" onchange="doCalcPrice(this.value)"  required ><br>
 	Counter-Party: <input type="text" name="counterparty" required><br>
 	Settlement Date:<input type="date" name="settlementdate" onchange="TDate(this)" required><br>
 	<button>Submit</button>
@@ -162,85 +162,23 @@
 	
 	<script type="text/javascript">
 	function doCalcPrice(str){
-		//console.log(bond);
+			console.log(bond);
+			var yield = parseFloat(str, 10)/100;
+			var coupon = bond.coupon/100;
+			var days_left = bond.days_left;
+			var freq = bond.freq;
+			var fv = bond.facevalue;
+
+			var period = 365/freq;
+			var payments_left = days_left/period;
+
+			var x = Math.pow(1+yield, payments_left);
+			var term1 = coupon*fv*(1/yield - 1/(yield*x));
+			var term2 = fv/x;
+			console.log(term1+term2);
 		
-		var byield=(parseFloat(str,10)/100);
-		var r=1/(1+byield);
-		console.log(r);
-		var a=((bond.coupon*bond.facevalue)*r);
-		var b=((Math.pow(r,Math.floor(bond.year))-1)/(r-1));
-		var c=(bond.facevalue*(Math.pow(r,bond.year)));
-		var price=(a*b)+c;
-		document.getElementById("price").value=price;
-	
-	}
-	  function calcPV(rate, per, nper, pmt, fv) {
 
-		    nper = parseFloat(nper);
-		    pmt = parseFloat(pmt);
-		    fv = parseFloat(fv);
-		    rate = (rate)/(per * 100);
-
-		    if ( rate == 0 ) // Interest rate is 0
-		    {
-
-		      pv_value = -(fv + (pmt * nper));
-
-		    } else {
-
-		      x = Math.pow(1 + rate, -nper);
-		      y = Math.pow(1 + rate, nper);
-		      pv_value = - ( x * ( fv * rate - pmt + y * pmt )) / rate;
-
-		    }
-
-		    //pv_value = decimalFP(pv_value,2);
-
-		    return (pv_value);
-
-		  }
-
-		  function computeBondPrice(str) {
-		    // First determine our resolution
-		    console.log(bond);
-		    var parValue        = bond.facevalue;//FV
-		    var yearsToMaturity = bond.year;//Year
-		    var intRate         = bond.coupon;//coupon rate
-		    var discountRate    = parseFloat(str);//YTM
-		    var periodicFreq    = bond.freq;//Frequency
-		    var lastPayout      = bond.dayleft;
-
-
-		    
-		    var pv = -1*calcPV( (discountRate), periodicFreq, yearsToMaturity*periodicFreq, (parValue*(intRate/100))/periodicFreq , parValue);
-
-		    var payOutPercent = (lastPayout%360)/360;
-		    switch(periodicFreq) {
-		      case (2):
-		        payOutPercent = (lastPayout%180)/180;
-		        break;
-		      case(3):
-		      	payOutPercent = (lastPayout%120)/120;
-		        break;
-		      case (4):
-		        payOutPercent = (lastPayout%90)/90;
-		        break;
-		      case (12):
-		        payOutPercent = (lastPayout%30)/30;
-		        break;
-		    }
-
-
-
-	     // form.CLEAN_PRICE.value = decimalFP(pv, 2);
-		      interest = payOutPercent*(parValue*(intRate/100))/periodicFreq;//accured interest
-		     // form.ACCRUED_INTEREST.value = decimalFP(interest, 2);
-		      console.log( interest+pv);
-		    
-
-
-		  }
-	
+		}
 	</script>
 
 </body>

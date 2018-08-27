@@ -27,7 +27,7 @@ public class YieldCalculator extends HttpServlet {
 		String isin=request.getParameter("isin");
 		//System.out.println(isin);
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT SecDet.CouRate,(DATEDIFF(day,SecDet.IsDate,SecDet.MatDate)/365),(DATEDIFF(day,SecDet.IsDate,GetDate())%365)"
+		String select="SELECT SecDet.CouRate, (DATEDIFF(day, SecDet.IsDate, SecDet.MatDate)/365), DATEDIFF(day, GETDATE(), SecDet.MatDate)"
 				+ ",SecDet.Freq,fvconv.FV FROM SecDet INNER JOIN fvconv ON SecDet.CoCode=fvconv.Country  WHERE SecDet.ISIN='"+ isin+"'" ;
 		//System.out.println(select);
 		PreparedStatement ps;
@@ -39,10 +39,9 @@ public class YieldCalculator extends HttpServlet {
 				//Enter the table entries here
 				json.put("coupon", rs.getFloat(1));
 				json.put("year", rs.getFloat(2));
-				int day=rs.getInt(4)==0? 1:rs.getInt(4);
-				json.put("dayleft", rs.getInt(3)%(360/day));
+				json.put("days_left", rs.getInt(3));
 				json.put("facevalue", rs.getInt(5));
-				json.put("freq",day );
+				json.put("freq",rs.getInt(4));
 				
 			}
 			conn.close();
