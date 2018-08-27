@@ -14,5 +14,4 @@ public class ActualBy360 implements DateDiffCalculator {
 	public float calculateBasis(int frequency, LocalDate tradedate) {
 		return(360);
 	}
-
 }

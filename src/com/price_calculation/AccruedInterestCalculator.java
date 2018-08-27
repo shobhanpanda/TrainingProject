@@ -16,6 +16,10 @@ public class AccruedInterestCalculator {
 		
 		long days = d.calculateDateDiff(trade.getPaymentDate(), trade.getSettlementDate());
 		float basis = d.calculateBasis(trade.getFrequency(), trade.getSettlementDate());
-		return((days/basis)*trade.getBond().getCoupon()*trade.getBond().getFaceValue());
+		if(trade.getBond().geCoupon() == 0) {
+			return((days/basis)*trade.getBond().getCoupon()*trade.getBond().getFaceValue());
+		} else {
+			return((days/basis)*trade.getBond().getDiscountedPrice());
+		}
 	}
 }

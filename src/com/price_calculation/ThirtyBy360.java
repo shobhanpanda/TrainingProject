@@ -16,7 +16,7 @@ public class ThirtyBy360 implements DateDiffCalculator{
 
 	@Override
 	public float calculateBasis(int frequency, LocalDate tradedate) {
-		return(360);
+		return(360/frequency);
 	}
 
 }
