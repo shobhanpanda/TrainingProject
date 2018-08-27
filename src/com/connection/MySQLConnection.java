@@ -8,9 +8,8 @@ public class MySQLConnection {
 	  
 	Connection con = null;
 	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/training","root","");
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;dataBaseName=training", "sa","sa123");
  
 	} catch (SQLException | ClassNotFoundException e1) {
 		// TODO Auto-generated catch block
