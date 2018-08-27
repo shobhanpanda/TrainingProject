@@ -16,7 +16,7 @@ public class TradeSearch extends HttpServlet {
 	public void service(HttpServletRequest request,HttpServletResponse response) {
 		String search=request.getParameter("substr");
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT * FROM refdb where ISIN like '"+ search+"%'";
+		String select="SELECT * FROM SecDet where ISIN like '"+ search+"%'";
 		//System.out.println(select);
 		PreparedStatement ps;
 		try {
