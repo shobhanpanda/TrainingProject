@@ -27,8 +27,8 @@ public class YieldCalculator extends HttpServlet {
 		String isin=request.getParameter("isin");
 		//System.out.println(isin);
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT refdb.CouRate,(DATEDIFF(refdb.MatDate,refdb.IsDate)/365),fvconv.FV FROM refdb "+
-				"INNER JOIN fvconv ON refdb.CoCode=fvconv.Country WHERE refdb.ISIN='"+ isin+"'" ;
+		String select="SELECT SecDet.CouRate,(DATEDIFF(day,SecDet.IsDate,SecDet.MatDate)/365),(DATEDIFF(day,SecDet.IsDate,GetDate())%365)"
+				+ ",SecDet.Freq,fvconv.FV FROM SecDet INNER JOIN fvconv ON SecDet.CoCode=fvconv.Country  WHERE SecDet.ISIN='"+ isin+"'" ;
 		//System.out.println(select);
 		PreparedStatement ps;
 		JSONObject json=new JSONObject();
@@ -39,10 +39,15 @@ public class YieldCalculator extends HttpServlet {
 				//Enter the table entries here
 				json.put("coupon", rs.getFloat(1));
 				json.put("year", rs.getFloat(2));
-				json.put("facevalue", rs.getInt(3));
+				int day=rs.getInt(4)==0? 1:rs.getInt(4);
+				json.put("dayleft", rs.getInt(3)%(360/day));
+				json.put("facevalue", rs.getInt(5));
+				json.put("freq",day );
+				
 			}
 			conn.close();
 			PrintWriter out=response.getWriter();
+			System.out.println();
 			out.print(json.toJSONString());
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
