@@ -169,7 +169,7 @@
 			var freq = bond.freq;
 			var fv = bond.facevalue;
 
-			var period = 365/freq;
+			var period = 360/freq;
 			var payments_left = days_left/period;
 
 			var x = Math.pow(1+yield, payments_left);
