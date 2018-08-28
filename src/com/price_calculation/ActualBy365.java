@@ -16,6 +16,7 @@ public class ActualBy365 implements DateDiffCalculator{
 	@Override
 	public float calculateBasis(LocalDate settlementDate) {
 		return(365);
+		
 	}
 
 }
