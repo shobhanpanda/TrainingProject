@@ -34,8 +34,8 @@
 	<input type="radio" name="buy" value="buy" checked> Buy
 	<input type="radio" name="buy" value="sell" > Sell<br>
 	</div>
-	Traded-Price: <input type="text" name="price" id="price" onchange="getBond()" required ><br>
-	Yield:<input type="text" name="yield" id="yield" onchange="doCalcPrice(this.value)"  required ><br>
+	Traded-Price: <input type="text" name="price" id="price" onchange="getBond(this)" required ><br>
+	Yield:<input type="text" name="yield" id="yield" onchange="doCalcPrice()"  required ><br>
 	Counter-Party: <input type="text" name="counterparty" required><br>
 	Settlement Date:<input type="date" name="settlementdate" onchange="TDate(this)" required><br>
 	<button>Submit</button>
@@ -43,10 +43,11 @@
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	var bond;
 	function TDate(date) {
 	    var UserDate = date.value;
 	    var ToDate = new Date();
-	    if (new Date(UserDate).getTime() <= ToDate.getTime()) {
+	    if (new Date(UserDate).getTime() >= ToDate.getTime()) {
 	    		date.value=null;
 	         	alert("The Date must be Bigger or Equal to today date");
 	     	}
@@ -84,7 +85,7 @@
 	
 	<script>
 	//Price Yield Calculation
-	function getBond()
+	function getBond(price)
 	{	
 		var myIsin=document.getElementById("isin").value;
 		console.log(myIsin);
@@ -96,7 +97,12 @@
 					success:(function(data)
 				            {
 		            	bond=JSON.parse(data);
-		            	//console.log(bond);
+		            	console.log(bond);
+		            	if(price.value%bond.tick!=0){
+			            	alert("Wrong tick size. The tick size is"+bond.tick);
+			            	price.value="";
+							return;
+			            	}
 		            	doCalcYield(bond);
 		            	}
 
@@ -107,8 +113,9 @@
 	                  alert('server not responding...');
 	            });
 	}
+
 	function doCalcYield(bond){
-		
+	
 		var p = parseInt(document.getElementById("price").value,10);//Price
 		console.log(typeof(p));
 		var r = (bond.coupon)/100;//Coupon
@@ -157,25 +164,27 @@
 
 		return (1/z) - 1;
 	}	
-	
-	</script>
-	
-	<script type="text/javascript">
-	function doCalcPrice(str){
-			console.log(bond);
-			var yield = parseFloat(str, 10)/100;
-			var coupon = bond.coupon/100;
-			var days_left = bond.days_left;
-			var freq = bond.freq;
-			var fv = bond.facevalue;
 
-			var period = 360/freq;
-			var payments_left = days_left/period;
+	function doCalcPrice(){
+			
+			var myIsin=document.getElementById("isin").value;
+			$.ajax(
+		            {
+		                url: 'pricecalculator',
+		                type: "POST",
+		                data: {isin:myIsin},
+						success:(function(data)
+					            {
+			            	console.log(data);
+			            	//console.log(bond);
+			            	}
 
-			var x = Math.pow(1+yield, payments_left);
-			var term1 = coupon*fv*(1/yield - 1/(yield*x));
-			var term2 = fv/x;
-			console.log(term1+term2);
+			            )
+		            })
+		            .fail(function(jqXHR, ajaxOptions, thrownError)
+		            {
+		                  alert('server not responding...');
+		            });
 		
 
 		}
