@@ -25,7 +25,8 @@ public class TradeDetails extends HttpServlet {
 			ps.setString(1, request.getParameter("isin"));
 			ps.setString(2, request.getParameter("tradetype"));
 			ps.setString(3, request.getParameter("tradedate"));
-			ps.setInt(4, Integer.getInteger(request.getParameter("price")));			
+			System.out.println(request.getParameter("price"));
+			ps.setInt(4, Integer.parseInt(request.getParameter("price")));			
 			ps.setFloat(5, Float.parseFloat(request.getParameter("yield")));
 			ps.setString(6, request.getParameter("counterparty"));
 			
