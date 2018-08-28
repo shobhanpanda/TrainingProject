@@ -2,9 +2,12 @@ package com.price_calculation;
 
 import java.time.LocalDate;
 
+import com.price_calculation.DateDiffCalculator;
+
 public class ThirtyBy360 implements DateDiffCalculator{
 
 	@Override
+
 	public long calculateDateDiff(LocalDate paymentDate, LocalDate settlementDate, boolean maturityDate) {
 		
 		int pd = paymentDate.getDayOfMonth(); 
@@ -24,6 +27,7 @@ public class ThirtyBy360 implements DateDiffCalculator{
 		}	
 		
 		long days = sd- pd; 
+
 		long months = settlementDate.getMonthValue() - settlementDate.getMonthValue();
 		long years = settlementDate.getYear() - settlementDate.getYear();
 		
@@ -32,8 +36,8 @@ public class ThirtyBy360 implements DateDiffCalculator{
 	}
 
 	@Override
-	public float calculateBasis(int frequency, LocalDate tradedate) {
-		return(360/frequency);
+	public float calculateBasis(LocalDate settlementDate) {
+		return(360);
 	}
 
 }
