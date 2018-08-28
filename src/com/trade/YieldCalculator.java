@@ -52,7 +52,6 @@ public class YieldCalculator extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

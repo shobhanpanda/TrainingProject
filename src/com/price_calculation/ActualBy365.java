@@ -3,6 +3,8 @@ package com.price_calculation;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import com.price_calculation.DateDiffCalculator;
+
 public class ActualBy365 implements DateDiffCalculator{
 
 	@Override
@@ -12,8 +14,8 @@ public class ActualBy365 implements DateDiffCalculator{
 	}
 
 	@Override
-	public float calculateBasis(int frequency, LocalDate settlementDate) {
-		return(365/frequency);
+	public float calculateBasis(LocalDate settlementDate) {
+		return(365);
 	}
 
 }
