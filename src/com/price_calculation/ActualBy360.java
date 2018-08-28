@@ -3,6 +3,8 @@ package com.price_calculation;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import com.price_calculation.DateDiffCalculator;
+
 public class ActualBy360 implements DateDiffCalculator {
 
 	@Override
@@ -11,7 +13,7 @@ public class ActualBy360 implements DateDiffCalculator {
 	}
 
 	@Override
-	public float calculateBasis(int frequency, LocalDate tradedate) {
+	public float calculateBasis(LocalDate tradedate) {
 		return(360);
 	}
 }

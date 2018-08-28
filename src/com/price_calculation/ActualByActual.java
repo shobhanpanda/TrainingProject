@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import com.price_calculation.DateDiffCalculator;
+
 public class ActualByActual implements DateDiffCalculator {
 
 	@Override
@@ -12,8 +14,8 @@ public class ActualByActual implements DateDiffCalculator {
 	}
 
 	@Override
-	public float calculateBasis(int frequency, LocalDate tradeDate) {
-		return(tradeDate.lengthOfYear()/frequency);
+	public float calculateBasis(LocalDate tradeDate) {
+		return(tradeDate.lengthOfYear());
 	}
 	
 }

@@ -5,5 +5,5 @@ import java.util.Date;
 
 public interface DateDiffCalculator {
 	public long calculateDateDiff(LocalDate paymentDate, LocalDate settlementDate);
-	public float calculateBasis(int frequency, LocalDate settlementDate);	
+	public float calculateBasis(LocalDate settlementDate);	
 }
