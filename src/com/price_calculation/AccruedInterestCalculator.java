@@ -1,4 +1,4 @@
-package com.price_calculation;
+```package com.price_calculation;
 
 public class AccruedInterestCalculator {
 	public static double calculate(Trade trade) {
