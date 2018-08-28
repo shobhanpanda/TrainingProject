@@ -115,7 +115,7 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="dashboard.html" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="dashboard.jsp" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="generate-trades.html" class="active"><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
 						<li><a href="view-trades.html" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
 						<li><a href="page-login.html" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
@@ -202,7 +202,7 @@
 									<h3>Enter trade details</h3>
 								</div>
 								<div class="panel-body">
-									<form>
+									<form action="trade" method="post"  autocomplete="off" >
 										<div class="row">
 											<div class="leftFormPanel col-md-4">
 												<p>Trade Date:</p>
@@ -222,7 +222,9 @@
 												<p>Settlement Date: </p>
 												<br>
 											</div>
+											
 											<div class="rightFormPanel col-md-2" style="width: 40%;">
+											<form action="trade" method="post"  autocomplete="off" >
 												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" onchange="TDate(this)" required></p>
 												<p><input type="time" name="tradetime" class="textElement" required></p>
 												<p><input type="text" name="isin" id="isin" class="isinText textElement" required onkeyup="search(this)"></p>
@@ -238,7 +240,7 @@
 															<span><i></i>Sell</span>
 														</div>
 													</div>
-												</p>
+												
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
 												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice()"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
@@ -252,6 +254,7 @@
 										<input type="hidden" name="years" id="years" class="form-control">
 										<br>
 										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
+										</form>
 										<!--br><br>
 										Trade Date: <input type="Date">
 										<br><br>

@@ -39,7 +39,9 @@
 						<form action="register" method="POST" autocomplete="off" id="registerform">
 							<!-- <div class="input-group" > -->
 								<!-- <input type="text" class="form-control" placeholder="Enter your name" style="margin-bottom: 5%;"> -->
-								<input class="form-control" placeholder="Enter your username" type="text" style="margin-bottom: 5%;" name="name" required="true" minlength="3">
+								<input class="form-control" placeholder="Enter your username" type="text" style="margin-bottom: 5%;" name="userName" required="true" minlength="3">
+								<input class="form-control" placeholder="Enter your last name" type="text" style="margin-bottom: 5%;" name="firstName" required="true" minlength="6">
+								<input class="form-control" placeholder="Enter your first name" type="text" style="margin-bottom: 5%;" name="lastName" required="true" minlength="6">
 								<input type="password" class="form-control" placeholder="Enter your password" style="margin-bottom: 5%;" name="password" required="true" minlength="6" id="password">
 								<input type="password" class="form-control" placeholder="Re-type your password" style="margin-bottom: 5%;"  name="repassword" required="true"  minlength="6" onkeyup="compared(this.value)" id="retype">
 								<button type="submit" class="btn btn-primary" style="margin-left: 43%; font-size: 102%;" ><i class="">SUBMIT</i></button>

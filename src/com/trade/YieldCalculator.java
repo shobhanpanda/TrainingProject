@@ -27,8 +27,8 @@ public class YieldCalculator extends HttpServlet {
 		String isin=request.getParameter("isin");
 		//System.out.println(isin);
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT SecDet.CouRate, (DATEDIFF(day, SecDet.IsDate, SecDet.MatDate)/365), DATEDIFF(day, GETDATE(), SecDet.MatDate)"
-				+ ",SecDet.Freq,fvconv.FV,fvconv.Tick_size FROM SecDet INNER JOIN fvconv ON SecDet.CoCode=fvconv.Country  WHERE SecDet.ISIN='"+ isin+"'" ;
+		String select="SELECT Bond.CouRate, (DATEDIFF(day, Bond.IsDate, Bond.MatDate)/365), DATEDIFF(day, GETDATE(), Bond.MatDate)"
+				+ ",Bond.Freq,CountryConvention.FV,CountryConvention.Tick_size FROM Bond INNER JOIN CountryConvention ON Bond.CoCode=CountryConvention.CountryCode  WHERE Bond.ISIN='"+ isin+"'" ;
 		//System.out.println(select);
 		PreparedStatement ps;
 		JSONObject json=new JSONObject();

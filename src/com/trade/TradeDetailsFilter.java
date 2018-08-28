@@ -41,7 +41,7 @@ public class TradeDetailsFilter implements Filter {
 	
 		String str=request.getParameter("isin");
 		// Change table here
-		String select="SELECT * FROM refdb where ISIN=?";
+		String select="SELECT * FROM Bond where ISIN=?";
 		PreparedStatement ps;
 		
 		try {
@@ -53,7 +53,7 @@ public class TradeDetailsFilter implements Filter {
 			while(rs.next()) {
 				row+=1;
 			}
-//			System.out.println(row);
+			System.out.println(row);
 			if(row>0) {
 				chain.doFilter(request, response);
 			}
