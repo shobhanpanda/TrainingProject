@@ -16,20 +16,20 @@ public class TradeDetails extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response) {
 
 		Connection conn=  MySQLConnection.getConnection();
-		String insert="INSERT INTO trade_details (isin,trade_date,trade_time,buy_sell,traded_price,counterparty,settlement_date) VALUES(?,?,?,?,?,?,?)";
+		String insert="INSERT INTO trade (ISIN,TradeType,TradeDate,TradePrice,TradeYield,CounterParty) VALUES(?,?,?,?,?,?)";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(insert);
 			
 			// Set String
 			ps.setString(1, request.getParameter("isin"));
-			ps.setString(2, request.getParameter("tradedate"));
-			ps.setString(3, request.getParameter("time"));
-			ps.setString(4, request.getParameter("buy"));
-			ps.setInt(5, Integer.parseInt(request.getParameter("price")));
+			ps.setString(2, request.getParameter("tradetype"));
+			ps.setString(3, request.getParameter("tradedate"));
+			ps.setInt(4, Integer.getInteger(request.getParameter("price")));			
+			ps.setFloat(5, Float.parseFloat(request.getParameter("yield")));
 			ps.setString(6, request.getParameter("counterparty"));
-			ps.setString(7, request.getParameter("settlementdate"));
-//			System.out.println(ps);
+			
+			System.out.println(ps);
 			int flag=ps.executeUpdate();
 			conn.close();
 			if(flag>0) {

@@ -14,18 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 public class Login extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		String name=request.getParameter("name");
+		String userName=request.getParameter("userName");
 		String password=request.getParameter("password");
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT * FROM login_credentials WHERE name=? AND password=? ";
+		String select="SELECT * FROM User1 WHERE userName=? AND Password=? AND Approval=1 ";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(select);
-			ps.setString(1, name);
+			ps.setString(1, userName);
 			ps.setString(2, password);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())  {
-				if(rs.getString("name").equals(name)&& rs.getString("password").equals(password)) {
+				System.out.println(rs.getString("userName"));
+				if(rs.getString("userName").equals(userName)&& rs.getString("Password").equals(password)) {
 					response.sendRedirect("dashboard.jsp");
 					return;
 				}

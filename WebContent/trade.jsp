@@ -222,7 +222,9 @@
 												<p>Settlement Date: </p>
 												<br>
 											</div>
+											
 											<div class="rightFormPanel col-md-2" style="width: 40%;">
+											<form action="trade" method="post"  autocomplete="off" >
 												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" onchange="TDate(this)" required></p>
 												<p><input type="time" name="tradetime" class="textElement" required></p>
 												<p><input type="text" name="isin" id="isin" class="isinText textElement" required onkeyup="search(this)"></p>
@@ -252,6 +254,7 @@
 										<input type="hidden" name="years" id="years" class="form-control">
 										<br>
 										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
+										</form>
 										<!--br><br>
 										Trade Date: <input type="Date">
 										<br><br>
