@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())  {
 				if(rs.getString("name").equals(name)&& rs.getString("password").equals(password)) {
-					response.sendRedirect("trade.jsp");
+					response.sendRedirect("dashboard.jsp");
 					return;
 				}
 
