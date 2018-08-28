@@ -1,25 +1,28 @@
-```package com.price_calculation;
+package com.price_calculation;
+
+import com.pojo.Trade;
+import com.trade.DayCountConv;
 
 public class AccruedInterestCalculator {
 	public static double calculate(Trade trade) {
-		DateDiffCalculator d;
-		switch(trade.bond.getDayCountConvention()) {
-			case DayCountConvention.ACTUAL_BY_ACTUAL	:	d = new ActualByActual();
+		DateDiffCalculator d = null;
+		switch(trade.getBond().getDayCountConv()) {
+			case ActualByActual     :	d = new ActualByActual();
 										break;
-			case DayCountConvention.ACTUAL_BY_365		:	d = new ActualBy365();
+			case ActualBy365		:	d = new ActualBy365();
 										break;
-			case DayCountConvention.ACTUAL_BY_360		:	d = new ActualBy360();
+			case ActualBy360		:	d = new ActualBy360();
 										break;
-			case DayCountConvention.THIRTY_BY_360		:	d = new ThirtyBy360();
+			case ThirtyBy360		:	d = new ThirtyBy360();
 										break;	
 		}
 		
-		long days = d.calculateDateDiff(trade.getPaymentDate(), trade.getSettlementDate());
-		float basis = d.calculateBasis(trade.getFrequency(), trade.getSettlementDate());
-		if(trade.getBond().geCoupon() != 0) {
-			return((days/basis)*trade.getBond().getCoupon()*trade.getBond().getFaceValue()/trade.getBond().getFrequency());
+		long days = d.calculateDateDiff(trade.getSettlementDate(), trade.getSettlementDate(), false);
+		float basis = d.calculateBasis(trade.getSettlementDate());
+		if(trade.getBond().getCouponRate() != 0) {
+			return((days/basis)*trade.getBond().getCouponRate()*trade.getBond().getFaceValue()/trade.getBond().getFrequency());
 		} else {
-			return((days/basis)*trade.getBond().getDiscountedPrice());
+			return((days/basis)*trade.getBond().getDiscountPrice());
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.pojo;
 import java.time.LocalDate;
+
+import com.trade.DayCountConv;
 public class Test {
 
 	public static void main(String[] args) {
@@ -13,5 +15,4 @@ public class Test {
 		trade.setSettlementDate();
 		System.out.println(trade.getSettlementDate());
 	}
-
 }

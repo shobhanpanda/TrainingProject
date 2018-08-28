@@ -1,11 +1,10 @@
 package com.pojo;
 import java.time.LocalDate;
 
+import com.trade.DayCountConv;
+
 //Call setCouponDate
 
-enum DayCountConv{
-	ActualBy360, ActualBy365, ActualByActual, ThirtyBy360;
-}
 
 public class Bond {
 	String isin;
