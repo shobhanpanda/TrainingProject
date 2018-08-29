@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ContextType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:id="_RjFvQKtIEeiAR7wdfcMuFQ" confirmationNeeded="false" name="Default">
+  <contextParameter xmi:id="_RjFvQatIEeiAR7wdfcMuFQ" comment="" name="Project_Server" prompt="Project_Server?" promptNeeded="false" type="id_String" value="localhost"/>
+  <contextParameter xmi:id="_RjFvQqtIEeiAR7wdfcMuFQ" comment="" name="Project_Login" prompt="Project_Login?" promptNeeded="false" type="id_String" value="sa"/>
+  <contextParameter xmi:id="_RjFvQ6tIEeiAR7wdfcMuFQ" comment="" name="Project_Database" prompt="Project_Database?" promptNeeded="false" type="id_String" value="ReferenceDatabase"/>
+  <contextParameter xmi:id="_RjFvRKtIEeiAR7wdfcMuFQ" comment="" name="Project_Password" prompt="Project_Password?" promptNeeded="false" type="id_String" value="sa123"/>
+  <contextParameter xmi:id="_RjFvRatIEeiAR7wdfcMuFQ" comment="" name="Project_Schema" prompt="Project_Schema?" promptNeeded="false" type="id_String" value=""/>
+  <contextParameter xmi:id="_RjFvRqtIEeiAR7wdfcMuFQ" comment="" name="Project_Port" prompt="Project_Port?" promptNeeded="false" type="id_String" value="1433"/>
+  <contextParameter xmi:id="_RjFvR6tIEeiAR7wdfcMuFQ" comment="" name="Project_AdditionalParams" prompt="Project_AdditionalParams?" promptNeeded="false" type="id_String" value=""/>
+</talendfile:ContextType>

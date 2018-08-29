@@ -1,11 +1,7 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en" class="fullscreen-bg">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
-
 
 <head>
 	<title>Login | CITI</title>
@@ -27,7 +23,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 </head>
 
-<body >
+<body>
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<div class="vertical-align-wrap">
@@ -42,7 +38,7 @@
 							<form class="form-auth-small" action="login" method="post" autocomplete="off">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Username</label>
-									<input type="text" class="form-control" id="signin-email" placeholder="Username" name="userName" required minlength="3">
+									<input type="text" class="form-control" id="signin-email" placeholder="Username" name="name" required minlength="3">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
@@ -75,12 +71,5 @@
 	</div>
 	<!-- END WRAPPER -->
 </body>
-<script>
-    $(document).ready(function() {
-        function disableBack() { window.history.forward() }
 
-        window.onload = disableBack();
-        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
-    });
-</script>
 </html>

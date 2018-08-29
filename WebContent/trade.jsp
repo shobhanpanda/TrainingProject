@@ -1,18 +1,5 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html lang="en">
-  <%
-  response.setHeader("Cache-Control","no-cache");
-  response.setHeader("Cache-Control","no-store");
-  response.setHeader("Pragma","no-cache");
-  response.setDateHeader ("Expires", 0);
-
-  if(session.getAttribute("userName")==null)
-      response.sendRedirect("index.jsp");
-
-  %>
-
 <head>
 	<title>Trade| CITI</title>
 	<meta charset="utf-8">
@@ -85,7 +72,7 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="generate-trades.jsp" class="active"><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></i></a></li>
+						<li><a href="trade.jsp" class="active"><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></i></a></li>
 						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
 						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 					</ul>
@@ -114,7 +101,7 @@
 									<h3>Enter trade details</h3>
 								</div>
 								<div class="panel-body">
-									<form action="trade" method="post"  autocomplete="off" >
+									<form>
 										<div class="row">
 											<div class="leftFormPanel col-md-4">
 												<p>Trade Date:</p>
@@ -153,7 +140,7 @@
 													</div>
 												</p>
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
-												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice(this.value)"  required></p>
+												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice()"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
 												<p><input type="Date" name="settlementdate" class="textElement" required></p>
 											</div>
@@ -173,7 +160,7 @@
 						<div class="col-md-6">
 							<div class="panel">
 								<div class="panel-body">
-									<form>
+									<form action="generatetrades" method="post" autocomplete="off">
 										<div style="margin:6%">
 											<div class="leftFormPanel col-md-6">
 												<p>Number of  trades:</p>
@@ -185,145 +172,11 @@
 										</div>
 										<br><br><br>
 										<div style="margin:5%">
-											<button type="button" class="btn btn-primary btn-lg" style="width:100%">Generate Random Trades</button>
+											<button type="submit" class="btn btn-primary btn-lg" style="width:100%">Generate Random Trades</button>
 										</div>
 									</form>
 								</div>
 							</div>
-							<!-- LABELS -->
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Labels &amp; Badges</h3>
-								</div>
-								<div class="panel-body">
-									<span class="label label-default">DEFAULT</span>
-									<span class="label label-primary">PRIMARY</span>
-									<span class="label label-success">SUCCESS</span>
-									<span class="label label-info">INFO</span>
-									<span class="label label-warning">WARNING</span>
-									<span class="label label-danger">DANGER</span>
-									<br>
-									<br>
-									<a href="#">Inbox <span class="badge">42</span></a>
-									<br>
-									<br>
-									<button class="btn btn-primary" type="button">
-										Messages <span class="badge">4</span>
-									</button>
-								</div>
-							</div>
-							<!-- END LABELS -->
-							<!-- PROGRESS BARS -->
-							<!--div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Progress Bars</h3>
-								</div>
-								<div class="panel-body">
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-											<span class="sr-only">60% Complete</span>
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-											<span class="sr-only">60% Complete (warning)</span>
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-											<span class="sr-only">60% Complete (success)</span>
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-											<span class="sr-only">60% Complete (danger)</span>
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-											75%
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-											<span class="sr-only">20% Complete</span>
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-											<span class="sr-only">45% Complete</span>
-										</div>
-									</div>
-									<div class="progress progress-xs">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-											<span class="sr-only">80% Complete</span>
-										</div>
-									</div>
-								</div>
-							</div-->
-							<!-- END PROGRESS BARS -->
-							<!-- INPUT GROUPS -->
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Input Groups</h3>
-								</div>
-								<div class="panel-body">
-									<div class="input-group">
-										<input class="form-control" type="text">
-										<span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
-									</div>
-									<br>
-									<div class="input-group">
-										<span class="input-group-btn">
-							<button class="btn btn-primary" type="button">Go!</button>
-						</span>
-										<input class="form-control" type="text">
-									</div>
-									<br>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-user"></i></span>
-										<input class="form-control" placeholder="Username" type="text">
-									</div>
-									<br>
-									<div class="input-group">
-										<input class="form-control" placeholder="Username" type="text">
-										<span class="input-group-addon"><i class="fa fa-user"></i></span>
-									</div>
-									<br>
-									<div class="input-group">
-										<span class="input-group-addon">$</span>
-										<input class="form-control" type="text">
-										<span class="input-group-addon">.</span>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-							</div>
-							<!-- END INPUT GROUPS -->
-							<!-- ALERT MESSAGES -->
-							<!--div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Alert Messages</h3>
-								</div>
-								<div class="panel-body">
-									<div class="alert alert-info alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<i class="fa fa-info-circle"></i> The system is running well
-									</div>
-									<div class="alert alert-success alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<i class="fa fa-check-circle"></i> Your settings have been succesfully saved
-									</div>
-									<div class="alert alert-warning alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<i class="fa fa-warning"></i> Warning, check your permission settings
-									</div>
-									<div class="alert alert-danger alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<i class="fa fa-times-circle"></i> Your account has been suspended
-									</div>
-								</div>
-							</div-->
-							<!-- END ALERT MESSAGES -->
 						</div>
 					</div>
 				</div>
@@ -468,12 +321,11 @@
 		return (1/z) - 1;
 	}	
 
-	function doCalcPrice(yield){
+	function doCalcPrice(){
 			
 			var myIsin=document.getElementById("isin").value;
 			var obj = yield;
 			console.log(sessionStorage.getItem("yield"));
-			
 			$.ajax(
 		            {
 		                url: 'pricecalculator',
