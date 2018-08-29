@@ -148,7 +148,7 @@
 													</div>
 												</p>
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
-												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice()"  required></p>
+												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice(this.value)"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
 												<p><input type="Date" name="settlementdate" class="textElement" required></p>
 											</div>
@@ -159,6 +159,7 @@
 										<br>
 										<input type="hidden" name="years" id="years" class="form-control">
 										<br>
+										<input type="hidden" name="accured" id="accrued" class="form-control">
 										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
 									</form>
 								</div>
@@ -213,7 +214,7 @@
 	    var ToDate = new Date();
 	    if (new Date(UserDate).getTime() >= ToDate.getTime()) {
 	    		date.value=null;
-	         	alert("The Date must be Bigger or Equal to today date");
+	         	alert("The Date must be Smaller or Equal to today date");
 	     	}
 		}
 	
@@ -329,11 +330,10 @@
 		return (1/z) - 1;
 	}	
 
-	function doCalcPrice(){
+	function doCalcPrice(yield){
 			
 			var myIsin=document.getElementById("isin").value;
-			var obj = yield;
-			console.log(sessionStorage.getItem("yield"));
+			
 			$.ajax(
 		            {
 		                url: 'pricecalculator',
@@ -342,7 +342,9 @@
 						success:(function(data)
 					            {
 			            	console.log(data);
-			            	document.getElementById("yield").value = data;
+			            	var obj = JSON.parse(data);
+			            	document.getElementById("accrued").value = obj.ai;
+			            	document.getElementById("price").value=(parseFloat(obj.price)-parseFloat(obj.ai));
 			            	//console.log(bond);
 			            	}
 

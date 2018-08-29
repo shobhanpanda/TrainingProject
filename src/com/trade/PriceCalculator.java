@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.apache.tomcat.jni.Local;
-import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
+
+
 import org.json.simple.JSONObject;
 
 import com.connection.MySQLConnection;
@@ -65,9 +65,6 @@ public class PriceCalculator extends HttpServlet {
 		String y = request.getParameter("yield");
 		Double d = Double.parseDouble(y);
 		
-		HttpSession session = request.getSession();
-		String s = (String)session.getAttribute("yield");
-		System.out.println(s);
 		
 		Connection conn= MySQLConnection.getConnection();
 		String select="SELECT Bond.CouRate, Bond.IsDate, Bond.MatDate, "
@@ -92,7 +89,9 @@ public class PriceCalculator extends HttpServlet {
 			
 			trade.setBond(bond);
 			trade.setTradeDate(LocalDate.now());
+			trade.setSettlementDate(trade.getTradeDate());
 			float ai = (float) AccruedInterestCalculator.calculate(trade);
+			System.out.println("Accrued interest: " + ai);
 			JSONObject j = new JSONObject();
 			j.put("ai", ai);
 			j.put("price",yieldToPrice(bond, d));

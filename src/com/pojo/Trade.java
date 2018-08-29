@@ -49,7 +49,7 @@ Bond bond;
 	public LocalDate getSettlementDate() {
 		return settlementDate;
 	}
-	public void setSettlementDate() {
+	public void setSettlementDate(LocalDate settlementDate) {
 		this.settlementDate = tradeDate.plusDays(bond.gettPlus());
 	}
 	public TradeType getTradeType() {

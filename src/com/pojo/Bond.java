@@ -1,7 +1,6 @@
 package com.pojo;
 import java.time.LocalDate;
-
-import com.trade.DayCountConvention;
+import com.trade.*;
 
 //Call setCouponDate
 

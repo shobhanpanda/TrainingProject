@@ -9,6 +9,7 @@ public class ActualBy360 implements DateDiffCalculator {
 
 	@Override
 	public long calculateDateDiff(LocalDate paymentDate, LocalDate settlementDate, boolean maturityDate){
+		
 		return(ChronoUnit.DAYS.between(paymentDate, settlementDate));
 	}
 
