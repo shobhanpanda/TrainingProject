@@ -332,14 +332,17 @@
 	function doCalcPrice(){
 			
 			var myIsin=document.getElementById("isin").value;
+			var obj = yield;
+			console.log(sessionStorage.getItem("yield"));
 			$.ajax(
 		            {
 		                url: 'pricecalculator',
 		                type: "POST",
-		                data: {isin:myIsin},
+		                data: {isin:myIsin, yield:yield},
 						success:(function(data)
 					            {
 			            	console.log(data);
+			            	document.getElementById("yield").value = data;
 			            	//console.log(bond);
 			            	}
 

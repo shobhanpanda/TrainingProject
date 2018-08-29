@@ -109,7 +109,7 @@ public class Bond {
 		this.couponPaymentDate = findLastCouponDate();
 	}
 	
-	LocalDate findLastCouponDate() {		
+	public LocalDate findLastCouponDate() {		
 		
 		LocalDate iDate=issueDate;
 		LocalDate cDate=LocalDate.now();

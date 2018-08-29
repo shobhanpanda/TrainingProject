@@ -23,11 +23,13 @@ import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.apache.tomcat.jni.Local;
+import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
 import org.json.simple.JSONObject;
 
 import com.connection.MySQLConnection;
 import com.pojo.Bond;
 import com.pojo.Trade;
+import com.price_calculation.AccruedInterestCalculator;
 import com.trade.DayCountConvention;
 
 
@@ -60,9 +62,12 @@ public class PriceCalculator extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String isin = request.getParameter("isin");
+		String y = request.getParameter("yield");
+		Double d = Double.parseDouble(y);
+		
 		HttpSession session = request.getSession();
 		String s = (String)session.getAttribute("yield");
-		double yield = Double.parseDouble(s);
+		System.out.println(s);
 		
 		Connection conn= MySQLConnection.getConnection();
 		String select="SELECT Bond.CouRate, Bond.IsDate, Bond.MatDate, "
@@ -81,12 +86,19 @@ public class PriceCalculator extends HttpServlet {
 			bond.setFaceValue(rs.getInt(5));
 			bond.setFrequency(rs.getInt(4));
 			bond.setTickSize(rs.getFloat(6));
-			bond.setDayCountConvention(getDayCountConvention(rs.getInt(7)));
-		
+			bond.setDayCountConvention(getDCC(rs.getInt(7)));
 			
+			Trade trade = new Trade();
+			
+			trade.setBond(bond);
+			trade.setTradeDate(LocalDate.now());
+			float ai = (float) AccruedInterestCalculator.calculate(trade);
+			JSONObject j = new JSONObject();
+			j.put("ai", ai);
+			j.put("price",yieldToPrice(bond, d));
 			couponDaysLeft(bond);
 			PrintWriter pw = response.getWriter();
-			pw.print(yieldToPrice(bond, yield));
+			pw.print(j.toJSONString());
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -95,15 +107,18 @@ public class PriceCalculator extends HttpServlet {
 	}
 	
 	public double yieldToPrice(Bond bond, double i) {
-		double c = bond.getCouponRate();
+		double c = bond.getCouponRate()/bond.getFrequency()/100;
+		System.out.println(c + " " + i);
+		i = i/bond.getFrequency()/100;
 		int F = bond.getFaceValue();
 		int N = couponDaysLeft(bond);
 		double price;
 		LocalDate settlementDate = LocalDate.now().plusDays(bond.gettPlus());
-		
-		double n = ChronoUnit.DAYS.between(bond.getCouponPaymentDate(), settlementDate)/(getBasis(bond.getDayCountConvention()));
-		
+		System.out.println(bond.findLastCouponDate());
+		double n = (double)ChronoUnit.DAYS.between(bond.findLastCouponDate(), settlementDate)*bond.getFrequency()/(getBasis(bond.getDayCountConvention()));
+		System.out.println(n + " " + c + " " + i);
 		price =(c*F*(1+((1-Math.pow(1+i, 1-N))/i)))/(Math.pow(1+i, n)) + (F/Math.pow(1+i, N+n-1));	
+		System.out.println(price);
 		return price;
 	}
 	
@@ -177,7 +192,7 @@ public class PriceCalculator extends HttpServlet {
 		return (ArrayList<LocalDate>) paymentDates;
 	}
 	
-	public DayCountConvention getDayCountConvention(int value) {
+	public DayCountConvention getDCC(int value) {
 		switch(value) {
 			case 1: return DayCountConvention.ActualByActual;
 			case 2: return DayCountConvention.ActualBy360;
