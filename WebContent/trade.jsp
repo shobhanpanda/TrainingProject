@@ -109,7 +109,7 @@
 									<h3>Enter trade details</h3>
 								</div>
 								<div class="panel-body">
-									<form>
+									<form action="trade" method="post"  autocomplete="off" >
 										<div class="row">
 											<div class="leftFormPanel col-md-4">
 												<p>Trade Date:</p>
@@ -159,7 +159,7 @@
 										<br>
 										<input type="hidden" name="years" id="years" class="form-control">
 										<br>
-										<input type="hidden" name="accured" id="accrued" class="form-control">
+										<input type="hidden" name="accrued" id="accrued" class="form-control">
 										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
 									</form>
 								</div>
@@ -345,6 +345,7 @@
 			            	var obj = JSON.parse(data);
 			            	document.getElementById("accrued").value = obj.ai;
 			            	document.getElementById("price").value=(parseFloat(obj.price)-parseFloat(obj.ai));
+			            	alert(document.getElementById("accrued").value);
 			            	//console.log(bond);
 			            	}
 
