@@ -471,12 +471,14 @@
 	function doCalcPrice(yield){
 			
 			var myIsin=document.getElementById("isin").value;
-			sessionStorage.setItem("yield", yield);
+			var obj = yield;
+			console.log(sessionStorage.getItem("yield"));
+			
 			$.ajax(
 		            {
 		                url: 'pricecalculator',
 		                type: "POST",
-		                data: {isin:myIsin},
+		                data: {isin:myIsin, yield:yield},
 						success:(function(data)
 					            {
 			            	console.log(data);

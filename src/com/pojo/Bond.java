@@ -2,7 +2,7 @@ package com.pojo;
 import java.time.LocalDate;
 
 import com.trade.DayCountConvention;
-
+import com.trade.*;
 //Call setCouponDate
 
 
@@ -109,7 +109,7 @@ public class Bond {
 		this.couponPaymentDate = findLastCouponDate();
 	}
 	
-	LocalDate findLastCouponDate() {		
+	public LocalDate findLastCouponDate() {		
 		
 		LocalDate iDate=issueDate;
 		LocalDate cDate=LocalDate.now();
