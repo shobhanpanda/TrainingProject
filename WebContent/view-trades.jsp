@@ -1,20 +1,13 @@
+<<<<<<< HEAD
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page import="com.connection.*" %>
+=======
+>>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
 <!doctype html>
-  <%
-  response.setHeader("Cache-Control","no-cache");
-  response.setHeader("Cache-Control","no-store");
-  response.setHeader("Pragma","no-cache");
-  response.setDateHeader ("Expires", 0);
-
-  if(session.getAttribute("userName")==null)
-      response.sendRedirect("index.jsp");
-
-  %>
 <html lang="en">
 <head>
 	<title>View Trades| CITI</title>
@@ -62,9 +55,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></a></li>
+						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></i></a></li>
 						<li><a href="view-trades.jsp" class="active"><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="logout" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -82,7 +75,7 @@
 								<h3 class="panel-title">Trades</h3>
 							</div>
 							<div class="panel-body">
-								<table class="table table-hover">
+								<table class="table table-hover" id="trade-table">
 									<thead>
 										<tr>
 											<th>Trade ID</th>
@@ -91,13 +84,23 @@
 											<th>Date</th>
 											<th>Price</th>
 											<th>Yield</th>
+											<th colspan="3">Accrued Interest</th>
 											<th>Counter Party</th>
-											<th>Accrued Interest</th>
-											<th>Clean Price</th>
+										</tr>
+										<tr>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th>Day 1</th><th>Day 2</th><th>Day 3</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+<<<<<<< HEAD
 										<% Connection conn= MySQLConnection.getConnection();
 											String select="Select * from Bond";
 											Statement st=conn.createStatement();
@@ -108,15 +111,61 @@
 											<td><% rs.getInt(1); %></td>
 											<td><% rs.getString(3); %></td>
 											<td><% rs.getString(4); %></td>
+=======
+											<td>1</td>
+											<td>12345678914</td>
+											<td>Buy</td>
+											<td>12/08/2013</td>
+											<td>100</td>
+											<td>3</td>
+											<td>100</td>
+											<td>100</td>
+											<td>100</td>
+											<td>XYZ</td>
+										</tr>	
+										<!--tr>
+											<td>1</td>
+											<td>12345678914</td>
+											<td>Buy</td>
+>>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
 											<td>12/08/2013</td>
 											<td>100</td>
 											<td>3</td>
 											<td>XYZ</td>
-											<td>12</td>
 											<td>100</td>
+											<td>100</td>
+											<td>100</td>
+<<<<<<< HEAD
 										<%
 										}
 										%>
+=======
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>12345678911</td>
+											<td>Buy</td>
+											<td>12/08/2013</td>
+											<td>100</td>
+											<td>3</td>
+											<td>XYZ</td>
+											<td>100</td>
+											<td>100</td>
+											<td>100</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>12345678912</td>
+											<td>Buy</td>
+											<td>12/08/2013</td>
+											<td>100</td>
+											<td>3</td>
+											<td>XYZ</td>
+											<td>100</td>
+											<td>100</td>
+											<td>100</td>
+										</tr-->
+>>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
 									</tbody>
 								</table>
 							</div>
@@ -143,9 +192,23 @@
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		 $("tr").bind("click",function(){
-		   location = "https://google.com";
+		$('#trade-table').on('click', 'tr', function() {
+			var values = $(this).find('td').map(function() {
+				return $(this).text();
+			});
+
+			//location = "BondDetails?isin="+values[1];
+			location = "view-bond-details.html";
+		});
+	
+		 /*$("tr").bind("click",function(){
+		   var x = document.getElementsByTagName('td')[1].innerHTML;
+		   alert(x);
+		   //location = "BondDetails?isin="+x;
 		 });
+		 function viewBond(){
+			window.location("http://google.com");
+		 }*/
 	</script>
 	
 </body>

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.apache.tomcat.jni.Local;
@@ -24,6 +27,7 @@ import org.json.simple.JSONObject;
 
 import com.connection.MySQLConnection;
 import com.pojo.Bond;
+import com.pojo.Trade;
 import com.trade.DayCountConvention;
 
 
@@ -56,6 +60,9 @@ public class PriceCalculator extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String isin = request.getParameter("isin");
+		HttpSession session = request.getSession();
+		String s = (String)session.getAttribute("yield");
+		double yield = Double.parseDouble(s);
 		
 		Connection conn= MySQLConnection.getConnection();
 		String select="SELECT Bond.CouRate, Bond.IsDate, Bond.MatDate, "
@@ -75,8 +82,11 @@ public class PriceCalculator extends HttpServlet {
 			bond.setFrequency(rs.getInt(4));
 			bond.setTickSize(rs.getFloat(6));
 			bond.setDayCountConvention(getDayCountConvention(rs.getInt(7)));
-					
-			couponDaysLeft(bond.getIssueDate(), bond.getMaturityDate(),bond.getFrequency());
+		
+			
+			couponDaysLeft(bond);
+			PrintWriter pw = response.getWriter();
+			pw.print(yieldToPrice(bond, yield));
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -84,10 +94,87 @@ public class PriceCalculator extends HttpServlet {
 		}
 	}
 	
-	public int couponDaysLeft(LocalDate issueDate, LocalDate maturityDate, int frequency) { 
+	public double yieldToPrice(Bond bond, double i) {
+		double c = bond.getCouponRate();
+		int F = bond.getFaceValue();
+		int N = couponDaysLeft(bond);
+		double price;
+		LocalDate settlementDate = LocalDate.now().plusDays(bond.gettPlus());
+		
+		double n = ChronoUnit.DAYS.between(bond.getCouponPaymentDate(), settlementDate)/(getBasis(bond.getDayCountConvention()));
+		
+		price =(c*F*(1+((1-Math.pow(1+i, 1-N))/i)))/(Math.pow(1+i, n)) + (F/Math.pow(1+i, N+n-1));	
+		return price;
+	}
+	
+	public int couponDaysLeft(Bond bond) {
+		
+		LocalDate issueDate = bond.getIssueDate(), maturityDate = bond.getMaturityDate();
+		LocalDate settlementDate = LocalDate.now();
+		settlementDate.plusDays(bond.gettPlus());
+		
+		int frequency = bond.getFrequency();
+		
 		AllCouponDates cDates = new AllCouponDates();
-		List<CouponDate> couponDates = cDates.calculate(issueDate, frequency);
-		return 0;
+		List<CouponDate> couponDates = cDates.calculate(issueDate, frequency);		
+		
+		int differenceInYears = maturityDate.getYear() - issueDate.getYear() - 1;
+		int currentYear = settlementDate.getYear();
+		
+		List<LocalDate> paymentDates = getLocalDateFromCouponDate(couponDates, bond, currentYear, 0);
+		paymentDates.addAll(getLocalDateFromCouponDate(couponDates, bond, bond.getMaturityDate().getYear(), 1));
+		
+		for (Iterator<LocalDate> iterator = paymentDates.iterator(); iterator.hasNext();) {
+			LocalDate localDate = (LocalDate) iterator.next();
+			System.out.println(localDate);
+		}	
+		
+		int totalDays = differenceInYears*frequency + paymentDates.size();
+		System.out.println("Payment days remaining:" + totalDays);
+		
+		if(differenceInYears == -1) {
+			return 0;
+		} else {
+			return totalDays;
+		}
+	}
+	
+	public int getBasis(DayCountConvention dcc) {
+		switch(dcc) {
+		case ActualBy360: return 360;
+		case ThirtyBy360: return 360;
+		case ActualBy365: return 365;
+		case ActualByActual: return (LocalDate.now().isLeapYear()?366:365);
+		default: return 365;
+		}
+	}
+	
+	public ArrayList<LocalDate> getLocalDateFromCouponDate(List<CouponDate> cd, Bond bond, int year, int option) {
+		Iterator it = (Iterator) cd.iterator();
+		LocalDate localDate = LocalDate.now();
+		LocalDate settlementDate = LocalDate.now();
+		settlementDate.plusDays(bond.gettPlus());
+		
+		List<LocalDate> paymentDates = new ArrayList<LocalDate>();
+		if(option == 0) {
+			for (java.util.Iterator iterator = cd.iterator(); iterator.hasNext();) {
+				CouponDate localDate2 = (CouponDate) iterator.next();				
+				LocalDate tempDate = LocalDate.of(year, localDate2.month, localDate2.day);
+				if(settlementDate.isBefore(tempDate)) {
+					paymentDates.add(tempDate);
+				}
+			}
+		} else if(option == 1) {
+			for (java.util.Iterator iterator = cd.iterator(); iterator.hasNext();) {
+				CouponDate localDate2 = (CouponDate) iterator.next();				
+				LocalDate tempDate = LocalDate.of(year, localDate2.month, localDate2.day);
+				if(bond.getMaturityDate().isAfter(tempDate)) {
+					paymentDates.add(tempDate);
+				}
+			}
+		}
+		
+		return (ArrayList<LocalDate>) paymentDates;
 	}
 	
 	public DayCountConvention getDayCountConvention(int value) {

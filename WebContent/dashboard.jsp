@@ -1,19 +1,8 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html lang="en">
-  <%
-  response.setHeader("Cache-Control","no-cache");
-  response.setHeader("Cache-Control","no-store");
-  response.setHeader("Pragma","no-cache");
-  response.setDateHeader ("Expires", 0);
 
-  if(session.getAttribute("userName")==null)
-      response.sendRedirect("index.jsp");
-
-  %>
 <head>
-	<title>Dashboard | CITI</title>
+	<title>Dashboard | CIII</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -54,7 +43,7 @@
 				<!--div class="navbar-btn navbar-btn-right">
 					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
 				</div-->
-				<div id="navbar-menu">
+				<!--div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
@@ -90,9 +79,9 @@
 						</li>
 						<!--li>
 							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-						</li-->
+						</li>
 					</ul>
-				</div>
+				</div-->
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
@@ -102,9 +91,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></a></li>
+						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
 						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="logout" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 						<!--li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
 						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
 						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
