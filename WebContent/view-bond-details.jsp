@@ -77,54 +77,59 @@
 								<div class="panel-body">
 									<table class="table table-hover" id="trade-table">
 										<tbody>
+											
+											<% Connection conn= MySQLConnection.getConnection();
+											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice from Bond INNER JOIN Trade where Trade.ISIN = Bond.ISIN";
+											Statement st=conn.createStatement();
+											ResultSet rs=st.executeQuery(select); 
+										while(rs.next()){
+											%>
+									
+											
 											<tr>
 												<td>Trade date:</td>
-												<td> </td>
-											</tr>
-											<tr>
-												<td>Trade time:</td>
-												<td> </td>
+												<td><% out.print(rs.getDate(1));%> </td>
 											</tr>
 											<tr>
 												<td>Security ISIN:</td>
-												<td></td>
+												<td><% out.print(rs.getString(2));%></td>
 											</tr>
 											<tr>
 												<td>Trade type:</td>
-												<td></td>
+												<td><% out.print(rs.getString(3));%></td>
 											</tr>
 											<tr>
 												<td>Yield:</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(4));%></td>
 											</tr>
 											<tr>
 												<td>Counter-party:</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>Settlement date:</td>
-												<td></td>
+												<td><% out.print(rs.getString(5));%></td>
 											</tr>
 											<tr>
 												<td>Accrued Interest (Day 1):</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(6));%></td>
 											</tr>
 											<tr>
 												<td>Accrued Interest (Day 2):</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(6)*2);%></td>
 											</tr>
 											<tr>
 												<td>Accrued Interest (Day 3):</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(6)*3);%></td>
 											</tr>
 											<tr>
 												<td>Clean price:</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(7)+rs.getFloat(6));%></td>
 											</tr>
 											<tr>
 												<td>Dirty price:</td>
-												<td></td>
+												<td><% out.print(rs.getFloat(7)+rs.getFloat(6));%></td>
 											</tr>
+											
+										<%
+										}
+										%>
 										</tbody>
 									</table>
 								</div>

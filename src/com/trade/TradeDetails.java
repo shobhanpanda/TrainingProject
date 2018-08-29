@@ -17,7 +17,7 @@ public class TradeDetails extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response) {
 		HttpSession session=request.getSession();
 		Connection conn=  MySQLConnection.getConnection();
-		String insert="INSERT INTO trade (ISIN,TradeType,TradeDate,TradePrice,TradeYield,CounterParty,UserName) VALUES(?,?,?,?,?,?,?)";
+		String insert="INSERT INTO trade (ISIN,TradeType,TradeDate,CleanPrice,TradeYield,CounterParty,UserName,AccruedInterest) VALUES(?,?,?,?,?,?,?,?)";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(insert);
@@ -31,6 +31,7 @@ public class TradeDetails extends HttpServlet {
 			ps.setFloat(5, Float.parseFloat(request.getParameter("yield")));
 			ps.setString(6, request.getParameter("counterparty"));
 			ps.setString(7,(String)session.getAttribute("userName"));
+			ps.setInt(8, (Integer.parseInt(request.getParameter("accrued"))));
 			System.out.println(ps);
 			int flag=ps.executeUpdate();
 			conn.close();
