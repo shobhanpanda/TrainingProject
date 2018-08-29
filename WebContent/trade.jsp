@@ -1,13 +1,10 @@
 <!doctype html>
 <html lang="en">
-<<<<<<< HEAD
 <%
 if(session.getAttribute("userName") == null){
-	response.sendRedirect("index.jsp");
+response.sendRedirect("index.jsp");
 }
 %>
-=======
->>>>>>> d3153b09003fba45c4c34a0ff7ac5f54eef62e8a
 <head>
 	<title>Trade| CITI</title>
 	<meta charset="utf-8">
@@ -148,7 +145,7 @@ if(session.getAttribute("userName") == null){
 													</div>
 												</p>
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
-												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice()"  required></p>
+												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice(this.value)"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
 												<p><input type="Date" name="settlementdate" class="textElement" required></p>
 											</div>
@@ -463,9 +460,10 @@ if(session.getAttribute("userName") == null){
 		return (1/z) - 1;
 	}	
 
-	function doCalcPrice(){
+	function doCalcPrice(yield){
 			
 			var myIsin=document.getElementById("isin").value;
+			sessionStorage.setItem("yield", yield);
 			$.ajax(
 		            {
 		                url: 'pricecalculator',
