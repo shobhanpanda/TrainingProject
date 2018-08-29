@@ -1,10 +1,17 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html lang="en">
-<%
-if(session.getAttribute("userName") == null){
-	response.sendRedirect("index.jsp");
-}
-%>
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("userName")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 <head>
 	<title>Dashboard | CITI</title>
 	<meta charset="utf-8">
@@ -95,9 +102,9 @@ if(session.getAttribute("userName") == null){
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
+						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></a></li>
 						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						<li><a href="logout" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 						<!--li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
 						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
 						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>

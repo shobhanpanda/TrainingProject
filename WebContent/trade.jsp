@@ -1,13 +1,17 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html lang="en">
-<<<<<<< HEAD
-<%
-if(session.getAttribute("userName") == null){
-	response.sendRedirect("index.jsp");
-}
-%>
-=======
->>>>>>> d3153b09003fba45c4c34a0ff7ac5f54eef62e8a
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("userName")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 <head>
 	<title>Trade| CITI</title>
 	<meta charset="utf-8">
