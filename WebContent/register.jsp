@@ -28,9 +28,9 @@
 	<div id="wrapper">
 		<div class="vertical-align-wrap">
 			<div class="" style="margin-top: 50px;">
-				<div class="auth-box lockscreen clearfix">
+				<div class="auth-box lockscreen clearfix" style="padding-bottom: 35%;">
 					<div class="content">
-						<h1 class="sr-only">Klorofil - Free Bootstrap dashboard</h1>
+		
 						<div class="logo text-center"><!--img src="assets/img/logo-dark.png" alt="Klorofil Logo"--><h2>Register</h2></div>
 						<!--div class="user text-center">
 							<img src="assets/img/user-medium.png" class="img-circle" alt="Avatar">
@@ -39,15 +39,16 @@
 						<form action="register" method="POST" autocomplete="off" id="registerform">
 							<!-- <div class="input-group" > -->
 								<!-- <input type="text" class="form-control" placeholder="Enter your name" style="margin-bottom: 5%;"> -->
-								<input class="form-control" placeholder="Enter your username" type="text" style="margin-bottom: 5%;" name="userName" required="true" minlength="3">
-								<input class="form-control" placeholder="Enter your last name" type="text" style="margin-bottom: 5%;" name="firstName" required="true" minlength="6">
-								<input class="form-control" placeholder="Enter your first name" type="text" style="margin-bottom: 5%;" name="lastName" required="true" minlength="6">
-								<input type="password" class="form-control" placeholder="Enter your password" style="margin-bottom: 5%;" name="password" required="true" minlength="6" id="password">
-								<input type="password" class="form-control" placeholder="Re-type your password" style="margin-bottom: 5%;"  name="repassword" required="true"  minlength="6" onkeyup="compared(this.value)" id="retype">
+								<input class="form-control" placeholder="Username" type="text" style="margin-bottom: 5%;" name="userName" required="true" minlength="3">
+								<input class="form-control" placeholder="First name" type="text" style="margin-bottom: 5%;" name="firstName" required="true" minlength="3">
+								<input class="form-control" placeholder="Last name" type="text" style="margin-bottom: 5%;" name="lastName" required="true" minlength="3">
+								<input type="password" class="form-control" placeholder="Password" style="margin-bottom: 5%;" name="password" required="true" minlength="6" id="password">
+								<input type="password" class="form-control" placeholder="Confirm password" style="margin-bottom: 5%;"  name="repassword" required="true"  minlength="6" onkeyup="compared(this.value)" id="retype">
 								<button type="submit" class="btn btn-primary" style="margin-left: 43%; font-size: 102%;" ><i class="">SUBMIT</i></button>
 								<!--span class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i></button></span-->
 							<!-- </div> -->
 						</form>
+						
 					</div>
 				</div>
 			</div>
