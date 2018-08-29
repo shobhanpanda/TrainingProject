@@ -3,19 +3,29 @@ package com.trade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeConfigurationException;
 
+import org.apache.tomcat.jni.Local;
 import org.json.simple.JSONObject;
 
 import com.connection.MySQLConnection;
+import com.pojo.Bond;
+import com.trade.DayCountConvention;
+
 
 /**
  * Servlet implementation class PriceCalculator
@@ -48,32 +58,61 @@ public class PriceCalculator extends HttpServlet {
 		String isin = request.getParameter("isin");
 		
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT SecDet.CouRate, SecDet.IsDate, SecDet.MatDate, "
-				+ " SecDet.Freq,fvconv.FV,fvconv.Tick_size FROM SecDet INNER JOIN fvconv ON SecDet.CoCode=fvconv.Country  WHERE SecDet.ISIN='"+ isin+"'" ;
-		
+		String select="SELECT Bond.CouRate, Bond.IsDate, Bond.MatDate, "
+				+ "Bond.Freq, CountryConvention.FV, CountryConvention.Tick_size, Bond.DayCouCon FROM Bond INNER JOIN CountryConvention ON Bond.CoCode=CountryConvention.CountryCode  WHERE Bond.ISIN='" +  isin + "';"; 
 		PreparedStatement ps;
-		JSONObject json=new JSONObject();
+		
 		try {
 			ps = conn.prepareStatement(select);
 			ResultSet rs=ps.executeQuery();
-			while(rs.next())  {
-				//Enter the table entries here
-				json.put("coupon", rs.getFloat(1));
-				json.put("year", rs.getFloat(2));
-				json.put("days_left", rs.getInt(3));
-				json.put("facevalue", rs.getInt(5));
-				json.put("freq",rs.getInt(4));
-				json.put("isin", isin);
-				json.put("tick", rs.getFloat(6));
-			}
+			rs.next();
+			
+			Bond bond = new Bond();
+			bond.setCouponRate(rs.getFloat(1));
+			bond.setIssueDate(rs.getDate(2).toLocalDate());
+			bond.setMaturityDate(rs.getDate(3).toLocalDate());
+			bond.setFaceValue(rs.getInt(5));
+			bond.setFrequency(rs.getInt(4));
+			bond.setTickSize(rs.getFloat(6));
+			bond.setDayCountConvention(getDayCountConvention(rs.getInt(7)));
+					
+			couponDaysLeft(bond.getIssueDate(), bond.getMaturityDate(),bond.getFrequency());
 			conn.close();
-			PrintWriter out=response.getWriter();
-			System.out.println();
-			out.print(json.toJSONString());
-		} catch (SQLException | IOException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public int couponDaysLeft(LocalDate issueDate, LocalDate maturityDate, int frequency) { 
+		AllCouponDates cDates = new AllCouponDates();
+		List<CouponDate> couponDates = cDates.calculate(issueDate, frequency);
+		return 0;
+	}
+	
+	public DayCountConvention getDayCountConvention(int value) {
+		switch(value) {
+			case 1: return DayCountConvention.ActualByActual;
+			case 2: return DayCountConvention.ActualBy360;
+			case 3: return DayCountConvention.ActualBy365;
+			case 4: return DayCountConvention.ThirtyBy360;
+			default:return DayCountConvention.ActualByActual;		
+		}
+	}
 
 }
+
+//int row_count=0;
+//System.out.println("while here");
+//b.setCouponRate(rs.getFloat(1));
+//issueDate = rs.getDate(2);
+//matDate = rs.getDate(3);
+//b.setFrequency(rs.getInt(4));
+//	//b.setTickSize(rs.getFloat(6));
+//	row_count++;
+//System.out.println("row_count : "+ row_count);
+//b.setIssueDate(issueDate.toLocalDate());
+//b.setMaturityDate(matDate.toLocalDate());
+//
+//System.out.println(b.toString());
+//LocalDate lastCouponDate = LastCouponPaymentCalculator.findLastCouponDate(b.getIssueDate(), frequency, 0);

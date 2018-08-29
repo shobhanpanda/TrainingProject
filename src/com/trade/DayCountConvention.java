@@ -1,5 +1,5 @@
 package com.trade;
 
-public enum DayCountConv{
+public enum DayCountConvention{
 	ActualBy360, ActualBy365, ActualByActual, ThirtyBy360;
 }
