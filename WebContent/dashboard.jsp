@@ -96,8 +96,6 @@ if(session.getAttribute("userName") == null){
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
-						<li><a href="view-trades.html" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="page-login.html" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
 						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 						<!--li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
