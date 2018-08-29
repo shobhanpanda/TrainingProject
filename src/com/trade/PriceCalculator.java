@@ -116,7 +116,14 @@ public class PriceCalculator extends HttpServlet {
 		System.out.println(bond.findLastCouponDate());
 		double n = (double)ChronoUnit.DAYS.between(bond.findLastCouponDate(), settlementDate)*bond.getFrequency()/(getBasis(bond.getDayCountConvention()));
 		System.out.println(n + " " + c + " " + i);
+		
 		price =(c*F*(1+((1-Math.pow(1+i, 1-N))/i)))/(Math.pow(1+i, n)) + (F/Math.pow(1+i, N+n-1));	
+//		price = 0.0f;
+//		for(int j=0;j<N-1;j++) {
+//			price += (c*F)/Math.pow(1+i, j+n);
+//		}
+//		price += (F*(c+1))/(Math.pow(i+1, (N+n-1)));
+		
 		System.out.println(price);
 		return price;
 	}
