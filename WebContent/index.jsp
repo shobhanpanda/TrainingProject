@@ -38,7 +38,7 @@
 							<form class="form-auth-small" action="login" method="post" autocomplete="off">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Username</label>
-									<input type="text" class="form-control" id="signin-email" placeholder="Username" name="userName" required minlength="3">
+									<input type="text" class="form-control" id="signin-email" placeholder="Username" name="name" required minlength="3">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
