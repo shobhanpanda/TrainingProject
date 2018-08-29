@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -16,17 +17,20 @@ public class Login extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		String userName=request.getParameter("userName");
 		String password=request.getParameter("password");
+		HttpSession session=request.getSession();
 		Connection conn= MySQLConnection.getConnection();
-		String select="SELECT * FROM User1 WHERE userName=? AND Password=? AND Approval=1 ";
+		String select="SELECT * FROM UserTable WHERE userName=? AND Password=? AND Approval=1 ";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(select);
 			ps.setString(1, userName);
 			ps.setString(2, password);
+			System.out.println(userName+password);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())  {
 				System.out.println(rs.getString("userName"));
 				if(rs.getString("userName").equals(userName)&& rs.getString("Password").equals(password)) {
+					session.setAttribute("userName", userName);
 					response.sendRedirect("dashboard.jsp");
 					return;
 				}

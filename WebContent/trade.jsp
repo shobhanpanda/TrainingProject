@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
-
+<<<<<<< HEAD
+<%
+if(session.getAttribute("userName") == null){
+	response.sendRedirect("index.jsp");
+}
+%>
+=======
+>>>>>>> d3153b09003fba45c4c34a0ff7ac5f54eef62e8a
 <head>
 	<title>Trade| CITI</title>
 	<meta charset="utf-8">
@@ -12,7 +19,6 @@
 	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
-	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project >
 	<link rel="stylesheet" href="assets/css/demo.css"-->
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -36,7 +42,7 @@
 		border:1px solid black;
 		margin-top:0px; 
 	}
-	.isinElement input,ul{
+	.isinElement input,.isinElement ul{
 		width:300px;	
 	}
 	.isinElement li:hover{
@@ -65,48 +71,6 @@
 						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
-				<!--div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-				</div-->
-			<!--	<div id="navbar-menu">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-								<i class="lnr lnr-alarm"></i>
-								<span class="badge bg-danger">5</span>
-							</a>
-							<ul class="dropdown-menu notifications">
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-								<li><a href="#" class="more">See all notifications</a></li>
-							</ul> 
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Basic Use</a></li>
-								<li><a href="#">Working With Data</a></li>
-								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
-							</ul>
-						</li>
-						<!-- <li>
-							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-						</li>
-					</ul>
-				</div> -->
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
@@ -116,26 +80,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="generate-trades.html" class="active"><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
-						<li><a href="view-trades.html" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="page-login.html" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
-						<!--li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
-						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
-						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
-						<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
-						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="nav">
-									<li><a href="page-profile.html" class="">Profile</a></li>
-									<li><a href="page-login.html" class="">Login</a></li>
-									<li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
-								</ul>
-							</div>
-						</li>
-						<li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
-						<li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
-						<li><a href="icons.html" class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li-->
+						<li><a href="generate-trades.jsp" class="active"><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></i></a></li>
+						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
+						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -146,56 +93,16 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Elements</h3>
+					<!--div class="row">
+						<div class="col-md-6">
+							<h3 class="page-title">Elements</h3>
+						</div>
+						<div class="col-md-6">
+							<h3 class="page-title">Elements</h3>
+						</div>
+					</div-->
 					<div class="row">
 						<div class="col-md-6">
-							<!-- BUTTONS -->
-							<!--div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Buttons</h3>
-								</div>
-								<div class="panel-body">
-									<p class="demo-button">
-										<button type="button" class="btn btn-default">Default</button>
-										<button type="button" class="btn btn-primary">Primary</button>
-										<button type="button" class="btn btn-info">Info</button>
-										<button type="button" class="btn btn-success">Success</button>
-										<button type="button" class="btn btn-warning">Warning</button>
-										<button type="button" class="btn btn-danger">Danger</button>
-									</p>
-									<br>
-									<p class="demo-button">
-										<button type="button" class="btn btn-primary btn-lg">Large Size</button>
-										<button type="button" class="btn btn-primary">Default Size</button>
-										<button type="button" class="btn btn-primary btn-sm">Small Size</button>
-										<button type="button" class="btn btn-primary btn-xs">Extra Small Size</button>
-									</p>
-									<br>
-									<p class="demo-button">
-										<button type="button" class="btn btn-default"><i class="fa fa-plus-square"></i> Default </button>
-										<button type="button" class="btn btn-primary"><i class="fa fa-refresh"></i> Primary</button>
-										<button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> Info</button>
-										<button type="button" class="btn btn-primary" disabled="disabled"><i class="fa fa-refresh fa-spin"></i> Refreshing...</button>
-									</p>
-									<br>
-									<p class="demo-button">
-										<button type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> Success</button>
-										<button type="button" class="btn btn-warning"><i class="fa fa-warning"></i> Warning</button>
-										<button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> Danger</button>
-										<button type="button" class="btn btn-primary" disabled="disabled"><i class="fa fa-spinner fa-spin"></i> Loading...</button>
-									</p>
-									<br>
-									<div class="row">
-										<div class="col-md-6">
-											<button type="button" class="btn btn-primary btn-block">Button Block</button>
-										</div>
-										<div class="col-md-6">
-											<button type="button" class="btn btn-warning btn-block">Button Block</button>
-										</div>
-									</div>
-								</div>
-							</div-->
-							<!-- END BUTTONS -->
 							<!-- INPUTS -->
 							<div class="panel">
 								<div class="panel-heading">
@@ -222,13 +129,12 @@
 												<p>Settlement Date: </p>
 												<br>
 											</div>
-											
 											<div class="rightFormPanel col-md-2" style="width: 40%;">
-											<form action="trade" method="post"  autocomplete="off" >
 												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" onchange="TDate(this)" required></p>
 												<p><input type="time" name="tradetime" class="textElement" required></p>
 												<p><input type="text" name="isin" id="isin" class="isinText textElement" required onkeyup="search(this)"></p>
 												<div id="response"></div>
+												<br>
 												<p>
 													<div class="row textElement">
 														<div class="col-md-6">
@@ -240,7 +146,7 @@
 															<span><i></i>Sell</span>
 														</div>
 													</div>
-												
+												</p>
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
 												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice()"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
@@ -254,108 +160,31 @@
 										<input type="hidden" name="years" id="years" class="form-control">
 										<br>
 										<button class="btn btn-primary btn-lg" style="margin-left: 35%; margin-bottom: 10%;">Submit</button>
-										</form>
-										<!--br><br>
-										Trade Date: <input type="Date">
-										<br><br>
-										Trade Time: <input type="time"required>
-										<br><br>
-										Security ISIN: <input type="text" placeholder="->
-										<br><br>
-										<div class="row">
-											<div class="col-md-3">Trade type:
-											</div>
-											<label class="fancy-radio col-md-3">
-												<input name="gender" value="Buy" type="radio">
-												<span><i></i>Buy</span>
-											</label>
-											<label class="fancy-radio col-md-3">
-												<input name="gender" value="Sell" type="radio">
-												<span><i></i>Sell</span>
-											</label>
-										</div>
-										<br>
-										<input type="password" class="form-control" value="asecret">
-										<br>
-										<textarea class="form-control" placeholder="textarea" rows="4"></textarea>
-										<br>
-										<select class="form-control">
-											<option value="cheese">Cheese</option>
-											<option value="tomatoes">Tomatoes</option>
-											<option value="mozarella">Mozzarella</option>
-											<option value="mushrooms">Mushrooms</option>
-											<option value="pepperoni">Pepperoni</option>
-											<option value="onions">Onions</option>
-										</select>
-										<br>
-										<label class="fancy-checkbox">
-											<input type="checkbox">
-											<span>Fancy Checkbox 1</span>
-										</label>
-										<label class="fancy-checkbox">
-											<input type="checkbox">
-											<span>Fancy Checkbox 2</span>
-										</label>
-										<label class="fancy-checkbox">
-											<input type="checkbox">
-											<span>Fancy Checkbox 3</span>
-										</label>
-										<br>
-										<label class="fancy-radio">
-											<input name="gender" value="male" type="radio">
-											<span><i></i>Male</span>
-										</label>
-										<label class="fancy-radio">
-											<input name="gender" value="female" type="radio">
-											<span><i></i>Female</span>
-										</label-->
 									</form>
 								</div>
 							</div>
 							<!-- END INPUTS -->
-							<!-- INPUT SIZING -->
-							<!--div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Input Sizing</h3>
-								</div>
-								<div class="panel-body">
-									<input class="form-control input-lg" placeholder=".input-lg" type="text">
-									<br>
-									<input class="form-control" placeholder="Default input" type="text">
-									<br>
-									<input class="form-control input-sm" placeholder=".input-sm" type="text">
-									<br>
-									<select class="form-control input-lg">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-									<br>
-									<select class="form-control">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-									<br>
-									<select class="form-control input-sm">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-								</div>
-							</div-->
-							<!-- END INPUT SIZING -->
 						</div>
 						<div class="col-md-6">
+							<div class="panel">
+								<div class="panel-body">
+									<form>
+										<div style="margin:6%">
+											<div class="leftFormPanel col-md-6">
+												<p>Number of  trades:</p>
+											</div>
+											
+											<div class="rightFormPanel col-md-6" style="width: 40%;">
+												<input type="text" name="randomTrades" class="textElement" required="true">
+											</div>
+										</div>
+										<br><br><br>
+										<div style="margin:5%">
+											<button type="button" class="btn btn-primary btn-lg" style="width:100%">Generate Random Trades</button>
+										</div>
+									</form>
+								</div>
+							</div>
 							<!-- LABELS -->
 							<div class="panel">
 								<div class="panel-heading">
@@ -380,7 +209,7 @@
 							</div>
 							<!-- END LABELS -->
 							<!-- PROGRESS BARS -->
-							<div class="panel">
+							<!--div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Progress Bars</h3>
 								</div>
@@ -426,7 +255,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div-->
 							<!-- END PROGRESS BARS -->
 							<!-- INPUT GROUPS -->
 							<div class="panel">
@@ -466,7 +295,7 @@
 							</div>
 							<!-- END INPUT GROUPS -->
 							<!-- ALERT MESSAGES -->
-							<div class="panel">
+							<!--div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Alert Messages</h3>
 								</div>
@@ -488,7 +317,7 @@
 										<i class="fa fa-times-circle"></i> Your account has been suspended
 									</div>
 								</div>
-							</div>
+							</div-->
 							<!-- END ALERT MESSAGES -->
 						</div>
 					</div>

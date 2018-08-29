@@ -1,8 +1,12 @@
 <!doctype html>
 <html lang="en">
-
+<%
+if(session.getAttribute("userName") == null){
+	response.sendRedirect("index.jsp");
+}
+%>
 <head>
-	<title>Dashboard | CIII</title>
+	<title>Dashboard | CITI</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -92,8 +96,8 @@
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i> <span>Generate Trades</span></i></a></li>
-						<li><a href="view-trades.html" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="page-login.html" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						<li><a href="view-trades.jsp" class=""><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
+						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 						<!--li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
 						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
 						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
