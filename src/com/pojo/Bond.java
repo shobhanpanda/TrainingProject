@@ -1,7 +1,7 @@
 package com.pojo;
 import java.time.LocalDate;
 
-import com.trade.DayCountConv;
+import com.trade.DayCountConvention;
 
 //Call setCouponDate
 
@@ -12,30 +12,35 @@ public class Bond {
 	String issuerName;
 	int faceValue;
 	int frequency;
-	double discountPrice;
 	int tPlus;
 	LocalDate issueDate;
 	LocalDate maturityDate;
-	DayCountConv dayCountConv;
-//	QuoteConv quoteConv;
+	DayCountConvention dayCountConvention;
+	float tickSize;
+	//	QuoteConv quoteConv;
 //	ArrayList<LocalDate> couponPaymentDates;
 	LocalDate couponPaymentDate;
-	public Bond(String iSIN, double couponRate, String issuerName, int faceValue, int frequency,double discountPrice, int tPlus, LocalDate issueDate,
-			LocalDate maturityDate, DayCountConv dayCountConv) {
+	public Bond(String iSIN, double couponRate, String issuerName, int faceValue, int frequency, int tPlus, LocalDate issueDate,
+			LocalDate maturityDate, DayCountConvention dayCountConvention, float tickSize) {
 		super();
 		this.isin = iSIN;
 		this.couponRate = couponRate;
 		this.issuerName = issuerName;
 		this.faceValue = faceValue;
 		this.frequency = frequency;
-		this.discountPrice = discountPrice;
 		this.tPlus = tPlus;
 		this.issueDate = issueDate;
 //		System.out.println("Issue date: "+issueDate);
 		this.maturityDate = maturityDate;
-		this.dayCountConv = dayCountConv;
-		
+		this.dayCountConvention = dayCountConvention;
+		this.tickSize = tickSize;
 	
+	}
+	public float getTickSize() {
+		return tickSize;
+	}
+	public void setTickSize(float tickSize) {
+		this.tickSize = tickSize;
 	}
 	public Bond() {
 //		issueDate = LocalDate.of(2017, 1, 1);
@@ -60,12 +65,6 @@ public class Bond {
 	}
 	public void setIssuerName(String issuerName) {
 		this.issuerName = issuerName;
-	}
-	public double getDiscountPrice() {
-		return discountPrice;
-	}
-	public void setDiscountPrice(double discountPrice) {
-		this.discountPrice = discountPrice;
 	}
 	public int gettPlus() {
 		return tPlus;
@@ -97,11 +96,11 @@ public class Bond {
 	public void setMaturityDate(LocalDate maturityDate) {
 		this.maturityDate = maturityDate;
 	}
-	public DayCountConv getDayCountConv() {
-		return dayCountConv;
+	public DayCountConvention getDayCountConvention() {
+		return dayCountConvention;
 	}
-	public void setDayCountConv(DayCountConv dayCountConv) {
-		this.dayCountConv = dayCountConv;
+	public void setDayCountConvention(DayCountConvention dayCountConvention) {
+		this.dayCountConvention = dayCountConvention;
 	}
 	public LocalDate getCouponPaymentDate() {
 		return couponPaymentDate;
@@ -142,15 +141,11 @@ public class Bond {
 				
 			}
 			
-			for(int i=0;i<thirtyMonths.length;i++)
-			{
-				if(newMonth==thirtyMonths[i])
-				{
-					if(newDay==31)
-					{
+			for(int i=0;i<thirtyMonths.length;i++) {
+				if(newMonth==thirtyMonths[i]) {
+					if(newDay==31) {
 						newDay=30;
-					}
-					
+					}	
 				}
 			}
 			
