@@ -16,7 +16,7 @@ public class Register extends HttpServlet {
 		String lastName=request.getParameter("lastName");
 		String password=request.getParameter("password");
 		Connection conn=  MySQLConnection.getConnection();
-		String insert="INSERT INTO User1(UserName,FirstName,LastName,Password,Approval) VALUES(?,?,?,?,0)";
+		String insert="INSERT INTO UserTable(UserName,FirstName,LastName,Password,Approval) VALUES(?,?,?,?,0)";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(insert);

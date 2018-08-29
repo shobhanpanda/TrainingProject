@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
-
+<%
+if(session.getAttribute("userName") == null){
+	response.sendRedirect("index.jsp");
+}
+%>
 <head>
 	<title>Trade| CITI</title>
 	<meta charset="utf-8">
