@@ -23,11 +23,13 @@ import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.apache.tomcat.jni.Local;
+import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
 import org.json.simple.JSONObject;
 
 import com.connection.MySQLConnection;
 import com.pojo.Bond;
 import com.pojo.Trade;
+import com.price_calculation.AccruedInterestCalculator;
 import com.trade.DayCountConvention;
 
 
@@ -85,11 +87,18 @@ public class PriceCalculator extends HttpServlet {
 			bond.setFrequency(rs.getInt(4));
 			bond.setTickSize(rs.getFloat(6));
 			bond.setDayCountConvention(getDCC(rs.getInt(7)));
-		
 			
+			Trade trade = new Trade();
+			
+			trade.setBond(bond);
+			trade.setTradeDate(LocalDate.now());
+			float ai = (float) AccruedInterestCalculator.calculate(trade);
+			JSONObject j = new JSONObject();
+			j.put("ai", ai);
+			j.put("price",yieldToPrice(bond, d));
 			couponDaysLeft(bond);
 			PrintWriter pw = response.getWriter();
-			pw.print(yieldToPrice(bond, d));
+			pw.print(j.toJSONString());
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -7,7 +7,8 @@ enum TradeType{
 
 public class Trade {
 	
-	Bond bond;
+
+Bond bond;
 	LocalDate tradeDate;
 	LocalDate settlementDate;
 	TradeType tradeType;
@@ -16,6 +17,11 @@ public class Trade {
 	double yield;
 	double accruedInterest;
 	String counterParty;
+
+	public Trade() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Trade(Bond bond, LocalDate tradeDate, TradeType tradeType, double dirtyPrice,
 			double yield, String counterParty) {
 		super();

@@ -342,6 +342,7 @@
 						success:(function(data)
 					            {
 			            	console.log(data);
+			            	document.getElementById("yield").value = data;
 			            	//console.log(bond);
 			            	}
 
