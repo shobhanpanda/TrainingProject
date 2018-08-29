@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd">
+  <talendfile:ContextType xmi:id="_1m1I4Kq8EeiAR7wdfcMuFQ" confirmationNeeded="false" name="Default">
+    <contextParameter xmi:id="_1m1I4aq8EeiAR7wdfcMuFQ" comment="" name="row_no" prompt="row_no?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter xmi:id="_1m1I4qq8EeiAR7wdfcMuFQ" comment="" name="bond_no" prompt="bond_no?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter xmi:id="_1m1I46q8EeiAR7wdfcMuFQ" comment="" name="user_no" prompt="user_no?" promptNeeded="false" type="id_Integer" value=""/>
+  </talendfile:ContextType>
+  <talendfile:ContextType xmi:id="_1m1I5Kq8EeiAR7wdfcMuFQ" confirmationNeeded="false" name="wasim">
+    <contextParameter xmi:id="_1m1I5aq8EeiAR7wdfcMuFQ" comment="" name="row_no" prompt="row_no?" promptNeeded="false" type="id_Integer" value="50"/>
+    <contextParameter xmi:id="_1m1I5qq8EeiAR7wdfcMuFQ" comment="" name="bond_no" prompt="bond_no?" promptNeeded="false" type="id_Integer" value="250"/>
+    <contextParameter xmi:id="_1m1I56q8EeiAR7wdfcMuFQ" comment="" name="user_no" prompt="user_no?" promptNeeded="false" type="id_Integer" value="1"/>
+  </talendfile:ContextType>
+</xmi:XMI>

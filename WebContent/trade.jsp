@@ -172,7 +172,7 @@
 						<div class="col-md-6">
 							<div class="panel">
 								<div class="panel-body">
-									<form>
+									<form action="generatetrades" method="post" autocomplete="off">
 										<div style="margin:6%">
 											<div class="leftFormPanel col-md-6">
 												<p>Number of  trades:</p>
@@ -184,7 +184,7 @@
 										</div>
 										<br><br><br>
 										<div style="margin:5%">
-											<button type="button" class="btn btn-primary btn-lg" style="width:100%">Generate Random Trades</button>
+											<button type="submit" class="btn btn-primary btn-lg" style="width:100%">Generate Random Trades</button>
 										</div>
 									</form>
 								</div>

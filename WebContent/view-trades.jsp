@@ -1,5 +1,9 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="com.connection.*" %>
 <!doctype html>
   <%
   response.setHeader("Cache-Control","no-cache");
@@ -94,38 +98,25 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>12345678910</td>
-											<td>Buy</td>
+										<% Connection conn= MySQLConnection.getConnection();
+											String select="Select * from Bond";
+											Statement st=conn.createStatement();
+											ResultSet rs=st.executeQuery(select); 
+										while(rs.next()){
+											%>
+										
+											<td><% rs.getInt(1); %></td>
+											<td><% rs.getString(3); %></td>
+											<td><% rs.getString(4); %></td>
 											<td>12/08/2013</td>
 											<td>100</td>
 											<td>3</td>
 											<td>XYZ</td>
 											<td>12</td>
 											<td>100</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>12345678910</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>12</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>12345678910</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>12</td>
-											<td>100</td>
-										</tr>
+										<%
+										}
+										%>
 									</tbody>
 								</table>
 							</div>
