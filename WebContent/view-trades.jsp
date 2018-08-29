@@ -5,8 +5,14 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page import="com.connection.*" %>
-=======
->>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
+ <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+   if(session.getAttribute("userName")==null)
+      response.sendRedirect("index.jsp");
+   %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -99,73 +105,36 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-<<<<<<< HEAD
-										<% Connection conn= MySQLConnection.getConnection();
+										
+											<% Connection conn= MySQLConnection.getConnection();
 											String select="Select * from Bond";
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
 											%>
-										
-											<td><% rs.getInt(1); %></td>
-											<td><% rs.getString(3); %></td>
-											<td><% rs.getString(4); %></td>
-=======
-											<td>1</td>
-											<td>12345678914</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-											<td>XYZ</td>
-										</tr>	
-										<!--tr>
-											<td>1</td>
-											<td>12345678914</td>
-											<td>Buy</td>
->>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-<<<<<<< HEAD
+											<% out.print("<tr>"); %>
+											<% out.print("<td>"+rs.getInt(1) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(2) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(4) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(5) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(6) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(7) +"</td>"); %>
+											<% out.print("</tr>"); %>
+
 										<%
 										}
 										%>
-=======
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>12345678911</td>
+											<!-- <td>1</td>
+											<td>12345678914</td>
 											<td>Buy</td>
 											<td>12/08/2013</td>
 											<td>100</td>
 											<td>3</td>
-											<td>XYZ</td>
 											<td>100</td>
 											<td>100</td>
 											<td>100</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>12345678912</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-										</tr-->
->>>>>>> 6440ba59d127e2aab59e0bdc7ab7553f0718d6c4
+											<td>XYZ</td>-->
+
 									</tbody>
 								</table>
 							</div>
