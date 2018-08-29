@@ -109,7 +109,7 @@ if(session.getAttribute("userName") == null){
 									<h3>Enter trade details</h3>
 								</div>
 								<div class="panel-body">
-									<form>
+									<form action="trade" method="post"  autocomplete="off" >
 										<div class="row">
 											<div class="leftFormPanel col-md-4">
 												<p>Trade Date:</p>

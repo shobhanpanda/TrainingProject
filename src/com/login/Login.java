@@ -25,6 +25,7 @@ public class Login extends HttpServlet {
 			ps = conn.prepareStatement(select);
 			ps.setString(1, userName);
 			ps.setString(2, password);
+			System.out.println(userName+password);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())  {
 				System.out.println(rs.getString("userName"));
