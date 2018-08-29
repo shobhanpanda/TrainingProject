@@ -1,7 +1,19 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!doctype html>
+  <%
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+
+  if(session.getAttribute("userName")==null)
+      response.sendRedirect("index.jsp");
+
+  %>
 <html lang="en">
 <head>
-	<title>View Tradess| CITI</title>
+	<title>View Trades| CITI</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -46,9 +58,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="dashboard.jsp" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="generate-trades.jsp" class=""><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></i></a></li>
+						<li><a href="trade.jsp" class=""><i class="lnr lnr-file-empty"></i><span>Generate Trades</span></a></li>
 						<li><a href="view-trades.jsp" class="active"><i class="lnr lnr-dice"></i> <span>View Trades</span></a></li>
-						<li><a href="index.jsp" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						<li><a href="logout" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
 					</ul>
 				</nav>
 			</div>
