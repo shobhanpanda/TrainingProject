@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>View Trades| CITI</title>
+	<title>Bond Details| CITI</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -59,90 +59,123 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<div class="col-md-12">
-						<!-- TABLE HOVER -->
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">Trades</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<!-- INPUTS -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3>Trade details</h3>
+								</div>
+								<div class="panel-body">
+									<table class="table table-hover" id="trade-table">
+										<tbody>
+											<tr>
+												<td>Trade date:</td>
+												<td> </td>
+											</tr>
+											<tr>
+												<td>Trade time:</td>
+												<td> </td>
+											</tr>
+											<tr>
+												<td>Security ISIN:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Trade type:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Yield:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Counter-party:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Settlement date:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Accrued Interest (Day 1):</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Accrued Interest (Day 2):</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Accrued Interest (Day 3):</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Clean price:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Dirty price:</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
-							<div class="panel-body">
-								<table class="table table-hover" id="trade-table">
-									<thead>
-										<tr>
-											<th>Trade ID</th>
-											<th>ISIN</th>
-											<th>Type</th>
-											<th>Date</th>
-											<th>Price</th>
-											<th>Yield</th>
-											<th colspan="3">Accrued Interest</th>
-											<th>Counter Party</th>
-										</tr>
-										<tr>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th>Day 1</th><th>Day 2</th><th>Day 3</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>12345678914</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-											<td>XYZ</td>
-										</tr>	
-										<!--tr>
-											<td>1</td>
-											<td>12345678914</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>12345678911</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>12345678912</td>
-											<td>Buy</td>
-											<td>12/08/2013</td>
-											<td>100</td>
-											<td>3</td>
-											<td>XYZ</td>
-											<td>100</td>
-											<td>100</td>
-											<td>100</td>
-										</tr-->
-									</tbody>
-								</table>
+							<!-- END INPUTS -->
+						</div>
+						<div class="col-md-6">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3>Bond details</h3>
+								</div>
+								<div class="panel-body">
+									<table class="table table-hover" id="trade-table">
+										<tbody>
+											<tr>
+												<td>ISIN:</td>
+												<td> </td>
+											</tr>
+											<tr>
+												<td>Coupon Rate:</td>
+												<td> </td>
+											</tr>
+											<tr>
+												<td>Issue date:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Maturity date:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Frequency:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Day-count convention:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Quote convention:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Issuer name:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Face value:</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Last coupon payment date:</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
-						<!-- END TABLE HOVER -->
 					</div>
 				</div>
 			</div>
@@ -164,23 +197,7 @@
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$('#trade-table').on('click', 'tr', function() {
-			var values = $(this).find('td').map(function() {
-				return $(this).text();
-			});
-
-			//location = "BondDetails?isin="+values[1];
-			location = "view-bond-details.html";
-		});
-	
-		 /*$("tr").bind("click",function(){
-		   var x = document.getElementsByTagName('td')[1].innerHTML;
-		   alert(x);
-		   //location = "BondDetails?isin="+x;
-		 });
-		 function viewBond(){
-			window.location("http://google.com");
-		 }*/
+		
 	</script>
 	
 </body>
