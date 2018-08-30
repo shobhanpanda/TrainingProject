@@ -31,7 +31,7 @@
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<!--nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<a href="index.html">Hi, name</a>
 			</div>
@@ -46,7 +46,7 @@
 					</div>
 				</form>
 			</div>
-		</nav>
+		</nav-->
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
