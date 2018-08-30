@@ -1,4 +1,8 @@
 <!doctype html>
+<<<<<<< HEAD
+ <%@page import="javax.sql.*"%>
+<%
+=======
  <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -7,6 +11,7 @@
  <%@ page import="com.connection.*" %>
  
  <%
+>>>>>>> 73a86368e22f7ad4b17be344529116692dfe4f8f
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setHeader("Pragma","no-cache");
@@ -38,11 +43,11 @@
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
-		<!--nav class="navbar navbar-default navbar-fixed-top">
-			<div class="brand">
-				<a href="index.html">Hi, name</a>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand" style="font-size: 25px; color: grey;">
+				Fixed Income OTC Transactions Reference Database
 			</div>
-			<div class="container-fluid">
+			<!--div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
@@ -52,8 +57,8 @@
 						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
-			</div>
-		</nav-->
+			</div-->
+		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
@@ -85,9 +90,15 @@
 									<table class="table table-hover" id="trade-table">
 										<tbody>
 											
+<<<<<<< HEAD
+											<%
+											Connection conn= MySQLConnection.getConnection();
+											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice from Bond INNER JOIN Trade where Trade.ISIN = Bond.ISIN";
+=======
 											<% Connection conn= MySQLConnection.getConnection();
 											String isin = request.getParameter("isin");
 											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice, Bond.CouRate, Bond.Freq, Bond.IsDate, Bond.MatDate, Bond.DayCouCon, Bond.Securities_IssuerName, CountryConvention.FV, CountryConvention.Tick_size from Bond INNER JOIN Trade ON Trade.ISIN = Bond.ISIN INNER JOIN CountryConvention ON CountryConvention.CountryCode=Bond.CoCode WHERE Bond.ISIN='"+isin+"';";
+>>>>>>> 73a86368e22f7ad4b17be344529116692dfe4f8f
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
