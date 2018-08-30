@@ -46,7 +46,7 @@ public class RandomTradeGenerator extends HttpServlet {
 			while(rsSelect.next()) {
 				String updateString="UPDATE Trade set AccruedInterest=?, CleanPrice=?, TradePrice=? WHERE ISIN=?";
 				PreparedStatement psUpdate = conn.prepareStatement(updateString);
-				psUpdate.setString(3,rsSelect.getString("ISIN"));
+				psUpdate.setString(4,rsSelect.getString("ISIN"));
 				
 				String selectQuery="SELECT Bond.CouRate, "
 						+ "Bond.Freq, CountryConvention.FV, CountryConvention.Tick_size, Bond.IsDate, Trade.TradeYield "
