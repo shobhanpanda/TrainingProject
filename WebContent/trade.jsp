@@ -57,9 +57,9 @@
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<!--nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><!--img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"-->Hi, name</a>
+				<a href="index.html"><!--img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo">Hi, name</a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -72,7 +72,7 @@
 					</div>
 				</form>
 			</div>
-		</nav>
+		</nav-->
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
@@ -114,8 +114,6 @@
 											<div class="leftFormPanel col-md-4">
 												<p>Trade Date:</p>
 												<br>
-												<p>Trade time:</p>
-												<br>
 												<p>Security ISIN:</p>
 												<br>
 												<p>Trade type: </p>
@@ -126,12 +124,9 @@
 												<br>
 												<p>Counter-party: </p>
 												<br>
-												<p>Settlement Date: </p>
-												<br>
 											</div>
 											<div class="rightFormPanel col-md-2" style="width: 40%;">
-												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" onchange="TDate(this)" required></p>
-												<p><input type="time" name="tradetime" class="textElement" required></p>
+												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" disabled onchange="TDate(this)" required></p>
 												<p><input type="text" name="isin" id="isin" class="isinText textElement" required onkeyup="search(this)"></p>
 												<div id="response"></div>
 												<br>
@@ -150,7 +145,6 @@
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
 												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice(this.value)"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
-												<p><input type="Date" name="settlementdate" class="textElement" required></p>
 											</div>
 										</div>
 										<input type="hidden" name="face_value" id="face_value" class="form-control" placeholder="Face Value">
@@ -358,6 +352,10 @@
 		
 
 		}
+		$( document ).ready(function() {
+    console.log( "ready!" );
+	document.getElementById("tradedate")=new Date();
+});
 	</script>
 </body>
 
