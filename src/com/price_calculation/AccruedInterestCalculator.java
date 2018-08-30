@@ -6,8 +6,7 @@ import com.trade.DayCountConvention;
 public class AccruedInterestCalculator {
 	public static double calculate(Trade trade) {
 		DateDiffCalculator d = null;
-		DayCountConvention dc = DayCountConvention.ActualBy360;
-		switch(dc) {
+		switch(trade.getBond().getDayCountConvention()) {
 			case ActualByActual     :	d = new ActualByActual();
 										break;
 			case ActualBy365		:	d = new ActualBy365();
@@ -16,6 +15,8 @@ public class AccruedInterestCalculator {
 										break;
 			case ThirtyBy360		:	d = new ThirtyBy360();
 										break;	
+			default					:	d = new ActualBy360();
+										break;
 		}
 		
 		long days = d.calculateDateDiff(trade.getBond().findLastCouponDate(), trade.getSettlementDate(), false);

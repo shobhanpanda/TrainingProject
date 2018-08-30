@@ -38,60 +38,60 @@ public class RandomTradeGenerator extends HttpServlet {
 		
 		String select = "select * from Trade";
 		Connection conn=MySQLConnection.getConnection();
-		PreparedStatement ps;
+		PreparedStatement psSelect;
 		try {
-			ps = conn.prepareStatement(select);
-			ResultSet rs;
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				String str="UPDATE Trade set AccruedInterest=?, CleanPrice=? WHERE ISIN=?";
-				PreparedStatement pst=conn.prepareStatement(str);
-				pst.setString(3,rs.getString("ISIN"));
+			psSelect = conn.prepareStatement(select);
+			ResultSet rsSelect;
+			rsSelect = psSelect.executeQuery();
+			while(rsSelect.next()) {
+				String updateString="UPDATE Trade set AccruedInterest=?, CleanPrice=?, TradePrice=? WHERE ISIN=?";
+				PreparedStatement psUpdate = conn.prepareStatement(updateString);
+				psUpdate.setString(3,rsSelect.getString("ISIN"));
 				
-				String q="SELECT Bond.CouRate, "
+				String selectQuery="SELECT Bond.CouRate, "
 						+ "Bond.Freq, CountryConvention.FV, CountryConvention.Tick_size, Bond.IsDate, Trade.TradeYield "
-						+ ", Bond.DayCouCon, Bond.IsDate, Bond.MatDate FROM Bond INNER JOIN Trade ON Bond.ISIN = Trade.ISIN INNER JOIN CountryConvention ON CountryConvention.CountryCode = Bond.CoCode WHERE Bond.ISIN='" +  rs.getString("ISIN") + "';"; 
+						+ ", Bond.DayCouCon, Bond.IsDate, Bond.MatDate FROM Bond INNER JOIN Trade ON Bond.ISIN = Trade.ISIN INNER JOIN CountryConvention ON CountryConvention.CountryCode = Bond.CoCode WHERE Bond.ISIN='" +  rsSelect.getString("ISIN") + "';"; 
 				PreparedStatement prep;
 				
 				try {
-					prep = conn.prepareStatement(q);
-					ResultSet r = prep.executeQuery();
-					r.next();
+					prep = conn.prepareStatement(selectQuery);
+					ResultSet rsBond = prep.executeQuery();
+					rsBond.next();
 					
 					Bond bond = new Bond();
-					bond.setCouponRate(r.getFloat(1));
-					bond.setFaceValue(r.getInt(3));
-					bond.setFrequency(r.getInt(2)>0?r.getInt(2):1);
-					bond.setTickSize(r.getFloat(4));
-					bond.setIssueDate(r.getDate(5).toLocalDate());
-					System.out.println(bond.getIssueDate());
-					bond.setIssueDate(r.getDate(8).toLocalDate());
-					bond.setMaturityDate(r.getDate(9).toLocalDate());
-					bond.setDayCountConvention(getDCC(r.getInt(7)));
+					bond.setCouponRate(rsBond.getFloat(1));
+					bond.setFaceValue(rsBond.getInt(3));
+					bond.setFrequency(rsBond.getInt(2)>0?rsBond.getInt(2):1);
+					bond.setTickSize(rsBond.getFloat(4));
+					bond.setIssueDate(rsBond.getDate(5).toLocalDate());
+					bond.setIssueDate(rsBond.getDate(8).toLocalDate());
+					bond.setMaturityDate(rsBond.getDate(9).toLocalDate());
+					bond.setDayCountConvention(getDCC(rsBond.getInt(7)));
 					Trade trade = new Trade();
 					
 					trade.setBond(bond);
 					trade.setTradeDate(LocalDate.now());
-					trade.setYield(r.getFloat(6));
+					trade.setYield(rsBond.getFloat(6));
 					
 					trade.setSettlementDate(trade.getTradeDate());
 					float ai = (float) AccruedInterestCalculator.calculate(trade);
 					
 					double c = bond.getCouponRate()/bond.getFrequency()/100;
-					float i = (float)trade.getYield();
-					i = i/bond.getFrequency()/100;
+					float yield = (float)trade.getYield();
+					yield = yield/bond.getFrequency()/100;
 					int F = bond.getFaceValue();
 					int N = couponDaysLeft(bond);
 					float price;
 					LocalDate settlementDate = LocalDate.now().plusDays(bond.gettPlus());
 					System.out.println(bond.findLastCouponDate());
 					double n = (double)ChronoUnit.DAYS.between(bond.findLastCouponDate(), settlementDate)*bond.getFrequency()/(365);
-					System.out.println(n + " " + c + " " + i);
-						
-					price =(float)((c*F*(1+((1-Math.pow(1+i, 1-N))/i)))/(Math.pow(1+i, n)) + (F/Math.pow(1+i, N+n-1)));	
-					pst.setFloat(1, ai);
-					pst.setFloat(2, price);
-					pst.executeUpdate();
+					System.out.println(n + " " + c + " " + yield);
+					
+					price =(float)((c*F*(1+((1-Math.pow(1+yield, 1-N))/yield)))/(Math.pow(1+yield, n)) + (F/Math.pow(1+yield, N+n-1)));	
+					psUpdate.setFloat(1, ai);
+					psUpdate.setFloat(2, (price-ai));
+					psUpdate.setFloat(3, price);
+					psUpdate.executeUpdate();
 					
 			} catch (SQLException e1) {
 			// TODO Auto-generated catch block
