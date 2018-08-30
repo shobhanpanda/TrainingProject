@@ -126,7 +126,7 @@
 												<br>
 											</div>
 											<div class="rightFormPanel col-md-2" style="width: 40%;">
-												<p><input type="Date" name="tradedate" id="tradedate" class="textElement" disabled onchange="TDate(this)" required></p>
+												<p><input type="text" name="tradedate" id="tradedate" class="textElement" disabled value="30-08-2018" required></p>
 												<p><input type="text" name="isin" id="isin" class="isinText textElement" required onkeyup="search(this)"></p>
 												<div id="response"></div>
 												<br>
@@ -257,8 +257,8 @@
 				            {
 		            	bond=JSON.parse(data);
 		            	console.log(bond);
-		            	if(price.value%bond.tick!=0){
-			            	alert("Wrong tick size. The tick size is"+bond.tick);
+		            	if(parseFloat(price.value)%parseFloat(bond.tick)!=0){
+			            	alert("Wrong tick size. The tick size is "+bond.tick);
 			            	price.value="";
 							return;
 			            	}
@@ -339,7 +339,7 @@
 			            	var obj = JSON.parse(data);
 			            	document.getElementById("accrued").value = obj.ai;
 			            	document.getElementById("price").value=(parseFloat(obj.price)-parseFloat(obj.ai));
-			            	alert(document.getElementById("accrued").value);
+			            	//alert(document.getElementById("accrued").value);
 			            	//console.log(bond);
 			            	}
 
