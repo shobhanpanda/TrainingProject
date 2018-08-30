@@ -107,18 +107,24 @@
 									<tbody>
 										
 											<% Connection conn= MySQLConnection.getConnection();
-											String select="Select * from Bond";
+											
+											String name=session.getAttribute("userName");
+											String select="Select * from Trade where UserName"+name;
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
 											%>
 											<% out.print("<tr>"); %>
 											<% out.print("<td>"+rs.getInt(1) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(2) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(3) +"</td>"); %>
 											<% out.print("<td>"+rs.getString(4) +"</td>"); %>
 											<% out.print("<td>"+rs.getString(5) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(6) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(7) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(10) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(7) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(9) +"</td>"); %>
+											<% out.print("<td>"+(rs.getFloat(9)*2) +"</td>"); %>
+											<% out.print("<td>"+(rs.getFloat(9)*3) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(8) +"</td>"); %>
 											<% out.print("</tr>"); %>
 
 										<%
