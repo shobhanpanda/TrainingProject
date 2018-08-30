@@ -108,8 +108,8 @@
 										
 											<% Connection conn= MySQLConnection.getConnection();
 											
-											String name=session.getAttribute("userName");
-											String select="Select * from Trade where UserName"+name;
+											String name=(String)session.getAttribute("userName");
+											String select="Select * from Trade where UserName='"+name+"';";
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
@@ -173,7 +173,7 @@
 			});
 
 			//location = "BondDetails?isin="+values[1];
-			location = "view-bond-details.html";
+			location = "view-bond-details.jsp?isin="+values[1];
 		});
 	
 		 /*$("tr").bind("click",function(){

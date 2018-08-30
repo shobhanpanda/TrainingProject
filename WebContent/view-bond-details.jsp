@@ -1,4 +1,11 @@
 <!doctype html>
+ <%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ page import="com.connection.*" %>
+ 
  <%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
@@ -79,7 +86,8 @@
 										<tbody>
 											
 											<% Connection conn= MySQLConnection.getConnection();
-											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice from Bond INNER JOIN Trade where Trade.ISIN = Bond.ISIN";
+											String isin = request.getParameter("isin");
+											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice, Bond.CouRate, Bond.Freq, Bond.IsDate, Bond.MatDate, Bond.DayCouCon, Bond.Securities_IssuerName, CountryConvention.FV, CountryConvention.Tick_size from Bond INNER JOIN Trade ON Trade.ISIN = Bond.ISIN INNER JOIN CountryConvention ON CountryConvention.CountryCode=Bond.CoCode WHERE Bond.ISIN='"+isin+"';";
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
@@ -120,16 +128,14 @@
 											</tr>
 											<tr>
 												<td>Clean price:</td>
-												<td><% out.print(rs.getFloat(7)+rs.getFloat(6));%></td>
+												<td><% out.print(rs.getFloat(7));%></td>
 											</tr>
 											<tr>
 												<td>Dirty price:</td>
 												<td><% out.print(rs.getFloat(7)+rs.getFloat(6));%></td>
 											</tr>
 											
-										<%
-										}
-										%>
+										
 										</tbody>
 									</table>
 								</div>
@@ -143,47 +149,46 @@
 								</div>
 								<div class="panel-body">
 									<table class="table table-hover" id="trade-table">
-										<tbody>
+									<tbody>
 											<tr>
 												<td>ISIN:</td>
-												<td> </td>
+												<td><%  out.print(rs.getString(2));%></td>
 											</tr>
 											<tr>
 												<td>Coupon Rate:</td>
-												<td> </td>
+												<td><%  out.print(rs.getFloat(8));%> </td>
 											</tr>
 											<tr>
 												<td>Issue date:</td>
-												<td></td>
+												<td><%  out.print(rs.getDate(10).toLocalDate());%></td>
 											</tr>
 											<tr>
 												<td>Maturity date:</td>
-												<td></td>
+												<td><%  out.print(rs.getDate(11).toLocalDate());%></td>
 											</tr>
 											<tr>
 												<td>Frequency:</td>
-												<td></td>
+												<td><%  out.print(rs.getInt(9));%></td>
 											</tr>
 											<tr>
 												<td>Day-count convention:</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>Quote convention:</td>
-												<td></td>
+												<td><%  out.print(rs.getInt(12));%></td>
 											</tr>
 											<tr>
 												<td>Issuer name:</td>
-												<td></td>
+												<td><%  out.print(rs.getString(13));%></td>
 											</tr>
 											<tr>
 												<td>Face value:</td>
-												<td></td>
+												<td><%  out.print(rs.getInt(14));%></td>
 											</tr>
 											<tr>
-												<td>Last coupon payment date:</td>
-												<td></td>
+												<td>Tick size:</td>
+												<td><%  out.print(rs.getFloat(15));%></td>
 											</tr>
+											<%
+										}
+										%>
 										</tbody>
 									</table>
 								</div>
