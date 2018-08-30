@@ -57,11 +57,11 @@
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
-		<!--nav class="navbar navbar-default navbar-fixed-top">
-			<div class="brand">
-				<a href="index.html"><!--img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo">Hi, name</a>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand" style="font-size: 25px; color: grey;">
+				Fixed Income OTC Transactions Reference Database
 			</div>
-			<div class="container-fluid">
+			<!--div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
@@ -71,8 +71,8 @@
 						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
-			</div>
-		</nav-->
+			</div-->
+		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
@@ -142,6 +142,7 @@
 														</div>
 													</div>
 												</p>
+												<br>
 												<p><input type="text" name="price" id="price" class="textElement" onchange="getBond(this)" required></p>
 												<p><input type="text" name="yield" id="yield" class="textElement" onchange="doCalcPrice(this.value)"  required></p>
 												<p><input type="text" name="counterparty" class="textElement" required></p>
