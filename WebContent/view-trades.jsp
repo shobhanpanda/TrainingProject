@@ -38,7 +38,7 @@
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<!--nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<a href="index.html">Hi, name</a>
 			</div>
@@ -53,7 +53,7 @@
 					</div>
 				</form>
 			</div>
-		</nav>
+		</nav-->
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
@@ -107,18 +107,24 @@
 									<tbody>
 										
 											<% Connection conn= MySQLConnection.getConnection();
-											String select="Select * from Bond";
+											
+											String name=(String)session.getAttribute("userName");
+											String select="Select * from Trade where UserName='"+name+"';";
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
 										while(rs.next()){
 											%>
 											<% out.print("<tr>"); %>
 											<% out.print("<td>"+rs.getInt(1) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(2) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(3) +"</td>"); %>
 											<% out.print("<td>"+rs.getString(4) +"</td>"); %>
 											<% out.print("<td>"+rs.getString(5) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(6) +"</td>"); %>
-											<% out.print("<td>"+rs.getString(7) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(10) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(7) +"</td>"); %>
+											<% out.print("<td>"+rs.getFloat(9) +"</td>"); %>
+											<% out.print("<td>"+(rs.getFloat(9)*2) +"</td>"); %>
+											<% out.print("<td>"+(rs.getFloat(9)*3) +"</td>"); %>
+											<% out.print("<td>"+rs.getString(8) +"</td>"); %>
 											<% out.print("</tr>"); %>
 
 										<%
@@ -167,7 +173,7 @@
 			});
 
 			//location = "BondDetails?isin="+values[1];
-			location = "view-bond-details.html";
+			location = "view-bond-details.jsp?isin="+values[1];
 		});
 	
 		 /*$("tr").bind("click",function(){

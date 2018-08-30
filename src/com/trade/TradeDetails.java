@@ -26,14 +26,15 @@ public class TradeDetails extends HttpServlet {
 			ps.setString(1, request.getParameter("isin"));
 			ps.setString(2, request.getParameter("tradetype"));
 			ps.setString(3, request.getParameter("tradedate"));
-			System.out.println(request.getParameter("price"));
-			ps.setInt(4, Integer.parseInt(request.getParameter("price")));			
+			System.out.println(request.getParameter("accrued"));
+			ps.setFloat(4, Float.parseFloat(request.getParameter("price")));			
 			ps.setFloat(5, Float.parseFloat(request.getParameter("yield")));
 			ps.setString(6, request.getParameter("counterparty"));
 			ps.setString(7,(String)session.getAttribute("userName"));
-			ps.setInt(8, (Integer.parseInt(request.getParameter("accrued"))));
-			System.out.println(ps);
+			ps.setFloat(8, Float.parseFloat(request.getParameter("accrued")));
+			
 			int flag=ps.executeUpdate();
+			System.out.println(flag);
 			conn.close();
 			if(flag>0) {
 			response.sendRedirect("trade.jsp" );
