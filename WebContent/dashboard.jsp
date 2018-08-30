@@ -75,7 +75,7 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Bonds Traded per country</h3>
+					<h3 class="page-title">Bonds available per country</h3>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
@@ -153,10 +153,10 @@
 		var options;
 		var data = {
 			//Put names of countries here
-			labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			labels: ['Germany', 'Hongkong', 'India', 'Japan', 'New Zealand', 'Thailand', 'United Kingdom', 'United States'],
 			//Put values here
 			series: [
-				[200, 380, 900, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+				[30, 27, 38, 26, 41, 18, 37, 33],
 			]
 		};
 		options = {
