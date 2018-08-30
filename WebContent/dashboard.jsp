@@ -32,7 +32,7 @@
 			display: block;
 			margin: 0 auto;
 		}
-	</style
+	</style>
 </head>
 
 <body>

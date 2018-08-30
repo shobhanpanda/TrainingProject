@@ -1,5 +1,6 @@
 <!doctype html>
- <%
+ <%@page import="javax.sql.*"%>
+<%
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setHeader("Pragma","no-cache");
@@ -78,7 +79,8 @@
 									<table class="table table-hover" id="trade-table">
 										<tbody>
 											
-											<% Connection conn= MySQLConnection.getConnection();
+											<%
+											Connection conn= MySQLConnection.getConnection();
 											String select="Select Trade.TradeDate, Bond.ISIN, Trade.TradeType, Trade.TradeYield, Trade.CounterParty, Trade.AccruedInterest, Trade.CleanPrice from Bond INNER JOIN Trade where Trade.ISIN = Bond.ISIN";
 											Statement st=conn.createStatement();
 											ResultSet rs=st.executeQuery(select); 
